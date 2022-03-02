@@ -1,0 +1,143 @@
+* {
+    margin: 0;
+    padding: 0;
+    font: inherit;
+    box-sizing: border-box;
+}
+
+.footer {
+    padding-top: 45px;
+    padding-bottom: 40px;
+    background-color: #292929;
+}
+
+.footer__container {
+    display: -webkit-box;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.container {
+    width: 96%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.footer__col {
+    -webkit-box-flex: 1;
+    flex-grow: 1;
+}
+
+.footer__title {
+    position: relative;
+    margin-bottom: 30px;
+    color: #fff;
+}
+
+h3 {
+    font-size: 1.875rem;
+    line-height: 1;
+    font-family: pf_kids_prograde_five, 'Trebuchet MS', sans-serif;
+}
+
+.footer__title::after {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 0;
+    width: 85%;
+    height: 1px;
+    background-color: #383838;
+}
+
+.list__item {
+    margin-bottom: 10px;
+}
+
+.footer a.footer__text {
+    text-decoration: none;
+    -webkit-transition: color .4s ease;
+    transition: color .4s ease;
+}
+
+.footer__text {
+    font-size: .8125rem;
+    color: #626262;
+}
+
+.socials {
+    font-size: 0;
+}
+
+.footer__socials {
+    margin-bottom: 20px;
+}
+
+.socials__item {
+    display: inline-block;
+    margin-right: 10px;
+}
+
+.socials__name_vk {
+    background-color: #43668a;
+}
+
+.socials__name {
+    display: block;
+    width: 22px;
+    height: 22px;
+    font-size: .8rem;
+    line-height: 22px;
+    color: #fff;
+    text-align: center;
+    text-decoration: none;
+    border-radius: 3px;
+}
+
+
+.socials__name_ok {
+    background-color: #f3962a;
+}
+
+.socials__name_fb {
+    background-color: #3a5999;
+}
+
+
+.socials__name_tw {
+    font-size: .7rem;
+    background-color: #1dadee;
+}
+
+.footer__text {
+    font-size: .8125rem;
+    color: #626262;
+}
+
+/* bottom */
+
+.footer__bottom {
+    padding-top: 10px;
+    margin-top: 40px;
+    border-top: 1px solid #383838;
+}
+
+.footer__bottom_col {
+    flex-basis: 50%;
+}
+
+.footer__text_group {
+    display: inline-block;
+    margin-right: 20px;
+    vertical-align: top;
+}
+
+.footer a.footer__text {
+    text-decoration: none;
+    -webkit-transition: color .4s ease;
+    transition: color .4s ease;
+}
+
+.footer__text_block {
+    display: block;
+}
