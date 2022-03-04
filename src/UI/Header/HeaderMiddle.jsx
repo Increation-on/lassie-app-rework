@@ -1,22 +1,14 @@
 import styles from '../styles/Header.module.css';
 import { useSelector } from 'react-redux';
-import { useState, useEffect } from 'react';
-import axios from 'axios';
-import { NavLink } from 'react-router-dom';
-const { REACT_APP_PORT } = process.env;
+import Logo from './Logo';
+import { useLocation } from 'react-router-dom';
+import { midInfoFirst, midInfoSecond, midTelFirst, midTelSecond } from '../../configs/contacts';
+import HeaderMidContatcs from './HeaderMidContatcs';
 
 
 const HeaderMiddle = (props) => {
 
-    const [contacts, setContacts] = useState([]);
-    const url = `http://localhost:${REACT_APP_PORT}`;
-
-    useEffect(() => {
-        axios.get(`${url}/contacts`).then(response => {
-            const data = response.data;
-            setContacts(data);
-        })
-    }, []);
+    const location = useLocation();
 
     const amount = useSelector(state => state.amount.amount);
     const totalPrice = useSelector(state => state.totalPrice.totalPrice);
@@ -24,21 +16,11 @@ const HeaderMiddle = (props) => {
     return (
         <div className={styles.header__middle}>
             <div className={`${styles.container} ${styles.header__container} ${styles.header__container_middle}`}>
-                <div className={`${styles.header__col} ${styles.header__col_logo}`}>
-                    <NavLink to="/" className={`${styles.header__logo} ${styles.logo}`}>
-                        <img src={require('../../img/header/logo.png')} alt="logo" />
-                    </NavLink>
-                </div>
+                <Logo location={location.pathname}/>
                 <div className={styles.header__contacts}>
                     <span className={`${styles.header__icon} ${styles.icon_comment}`}></span>
-                    {contacts.map((el) => {
-                        return <div key={el.tel} className={`${styles.header__col} ${styles.header__col_contacts}`}>
-                            <div className={styles.contacts}>
-                                <a href="#" className={styles.contacts__tel}>{el.tel}</a>
-                                <div className={styles.contacts__info}>{el.info}</div>
-                            </div>
-                        </div>
-                    })}
+                    <HeaderMidContatcs tel={midTelFirst} info={midInfoFirst} />
+                    <HeaderMidContatcs tel={midTelSecond} info={midInfoSecond} />
                     <div className={`${styles.header__col} ${styles.header__col_contacts}`}>
                         <div className={styles.contacts}>
                             <a href="#" className={styles.link}>Контактная иформация</a>

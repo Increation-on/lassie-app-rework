@@ -3,20 +3,16 @@ import styles from '../styles/Header.module.css';
 import HeaderDropdownMenu from './HeaderDropdownMenu';
 import { useEffect } from 'react';
 import axios from 'axios';
-const { REACT_APP_PORT } = process.env;
-
 
 const HeaderBottom = () => {
     const [menu, setMenu] = useState([]);
-    const url = `http://localhost:${REACT_APP_PORT}`;
 
     useEffect(() => {
-        axios.get(`${url}/headerBottomMenuItems`).then(response => {
+        axios.get(`mocks/headerBotNav.json`).then(response => {
             const data = response.data;
             setMenu(data);
         })
     }, []);
-
 
     return (
         <div className={styles.header__bottom}>
@@ -25,17 +21,27 @@ const HeaderBottom = () => {
                     <ul className={`${styles.header__menu} ${styles.menu} ${styles.menu_width_full}`}>
                         {menu.map((el) => {
                             return (
-                                <li className={styles.menu__item} key={el.title}>
-                                    <a href="#" className={styles.menu__name}>{el.title}</a>
-                                    <HeaderDropdownMenu />
+                                <li className={styles.menu__item} key={el.id}>
+                                    {el.title === "Распродажа" ? <a href="#" className={`${styles.header__sale_wrapper} ${styles.menu__name}`}>
+                                            <span className={styles.header__sale}>{el.title}</span>
+                                        </a>
+                                     : <a href="#" className={styles.menu__name}>{el.title}</a>}
                                 </li>
                             )
                         })}
+                        <HeaderDropdownMenu data={menu} />
                     </ul>
                 </nav>
             </div>
         </div>
     )
 }
+
+
+<li className={`${styles.header} ${styles.menu__item}`}>
+    <a href="javascript:void(0);" className={`${styles.header__sale_wrapper} ${styles.menu__name}`}>
+        <span className={styles.header__sale}>Распродажа</span></a>
+
+</li>
 
 export default HeaderBottom;

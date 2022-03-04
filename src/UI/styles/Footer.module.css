@@ -141,3 +141,68 @@ h3 {
 .footer__text_block {
     display: block;
 }
+
+@font-face {
+	font-family: pf_kids_prograde_five;
+    src: url(../../fonts/pfkidspro-gradefive-webfont.eot);
+	src: url(../../fonts/pfkidspro-gradefive-webfont.eot?#iefix) format('embedded-opentype'), url(../../fonts/pfkidspro-gradefive-webfont.woff2) format('woff2'), url(../../fonts/pfkidspro-gradefive-webfont.woff) format('woff'), url(../../fonts/pfkidspro-gradefive-webfont.ttf) format('truetype'), url(../../fonts/pfkidspro-gradefive-webfont.svg#pf_kids_prograde_five) format('svg');
+	font-weight: 400;
+	font-style: normal
+}
+
+@font-face {
+	font-family: fontello;
+	src: url(../../fonts/fontello.eot);
+	src: url(../../fonts/fontello.eot#iefix) format('embedded-opentype'), url(../../fonts/fontello.woff) format('woff'), url(../../fonts/fontello.ttf) format('truetype'), url(../../fonts/fontello.svg#fontello) format('svg');
+	font-weight: 400;
+	font-style: normal
+}
+
+[class*="icon_"]::before,
+[class^=icon_]::before {
+	font-family: fontello;
+	font-style: normal;
+	font-weight: 400;
+	display: inline-block;
+	text-decoration: inherit;
+	width: 1em;
+	margin-right: .2em;
+	text-align: center;
+	font-variant: normal;
+	text-transform: none;
+	line-height: 1em;
+	margin-left: .2em;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale
+}
+
+.icon_odnoklassniki::before {
+	content: '\e805'
+}
+
+.icon_facebook::before {
+	content: '\e806'
+}
+
+.icon_twitter_bird::before {
+	content: '\e807'
+}
+
+.icon_vkontakte::before {
+	content: '\e808'
+}
+
+.icon_load::before {
+	content: '\e809'
+}
+
+.footer__bottom a:hover {
+    color:#292929;
+}
+
+.footer a.footer__text:hover {
+    text-decoration: none;
+    -webkit-transition: color .4s ease;
+    transition: color .4s ease;
+    color: green;
+}

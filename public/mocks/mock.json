@@ -10,28 +10,5 @@
       { "id": 8, "title": "Детская зимняя куртка Reimatec® Dinkar", "price": 3899, "img":"/images/products/good-3.jpg" },
       { "id": 9, "title": "Пинетки для новорожденных Neuvo", "price": 849, "img":"/images/products/good-4.jpg" },
       { "id": 10, "title": "Шапка-бини для новорожденных Hilal", "price": 1599, "img":"/images/products/good-5.jpg" }
-    ],
-
-    "headerTopMenuItems": [
-      {"title":"О компании", "id":1, "path":"/about"},
-      {"title":"Оплата", "id":2, "path":"/payment"},
-      {"title":"Доставка", "id":3, "path":"/delivery"}
-  ],
-
-  "contacts": [
-    {"tel":"8 495 215-04-35", "info":"с 9:00 до 24:00 ежедневно"},
-    {"tel":"8 800 333-12-04", "info":"24 часа 7 дней в неделю"}
-
-  ],
-
-  "headerBottomMenuItems": [
-    { "title": "Коллекции" },
-    { "title": "Верхняя одежда" },
-    { "title": "Игра слоями" },
-    { "title": "Для прогулки и спорта" },
-    { "title": "Летняя одежда" },
-    { "title": "Обувь" },
-    { "title": "Аксессуары" },
-    { "title": "Для новорожденных" }
-  ]
+    ]
 }
