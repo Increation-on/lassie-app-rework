@@ -1,40 +1,13 @@
 import styles from '../styles/Header.module.css';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
+import { type } from '@testing-library/user-event/dist/type';
 
 const HeaderDropdownMenu = (props) => {
 
-    const [mainData, setMainData] = useState([]);
-
-
-    useEffect(() => {
-        axios.get('/mocks/dropDownMenu.json').then(response => {
-            const data = response.data;
-            setMainData(data);
-        })
-    }, []);
-
-    // Object.keys(mainData).map((item)=>{
-    //     console.log(mainData[item])
-    //     mainData[item].map(el=>{
-    //         console.log(el.type);
-    //     }) 
-    // })
-
-    // console.log(Object.keys(mainData))
-    // const hed = Object.keys(mainData);
-    // console.log(hed[0])
-    // console.log(typeof mainData);   
-
-
-
-
-    Object.keys(mainData).map((item) => {
-            console.log(item)
-        mainData[item].map(el => {
-            console.log(item, el.type);
-        })
-    })
+   const items = props.items;
+   console.log(items);
+    
 
     return (
         <ul className={styles.dropdown_menu}>
@@ -44,48 +17,33 @@ const HeaderDropdownMenu = (props) => {
                 </div>
                 <div className={styles.dropdown_menu__menu_col}>
                     <ul className={styles.vertical_menu}>
-                        {/* {mainData.map(el => {
-                            return <li key={el.id} className={styles.vertical_menu__item}>
-                                {el.type1 ? <span className={styles.vertical_menu__name}>{el.title}</span> :
-                                    <a href="#" className={styles.vertical_menu__name}>{el.title}</a>}
+                        {/* {items.map(item => {
+                            return <li key={item.id} className={styles.vertical_menu__item}>
+                                {item.type.length > 0 ? <span className={styles.vertical_menu__name}>{item.title}</span> :
+                                    <a href="#" className={styles.vertical_menu__name}>{item.title}</a>}
                                 <ul className={styles.vertical_menu__submenu}>
                                     <li className={styles.vertical_menu__submenu_item}>
-                                        <a href="#" className={`${styles.link} ${styles.vertical_menu__submenu_name}`}>
-                                            {el.type1}
-                                        </a>
-                                    </li>
-                                    <li className={styles.vertical_menu__submenu_item}>
-                                        <a href="#" className={`${styles.link} ${styles.vertical_menu__submenu_name}`}>
-                                            {el.type2}
-                                        </a>
+                                        {item.type.map(el => {
+                                            return <a href="#" key={el.id} className={`${styles.link} ${styles.vertical_menu__submenu_name}`}>{el.title}</a>
+                                        })}
                                     </li>
                                 </ul>
                             </li>
                         })} */}
-                        {/* {Object.keys(mainData).map((item) => {
-                            mainData[item].map(el => {
-                                return <li key={el.id} className={styles.vertical_menu__item}>
-                                {el.type ? <span className={styles.vertical_menu__name}>{item}</span> :
-                                    <a href="#" className={styles.vertical_menu__name}>{item}</a>}
-                                <ul className={styles.vertical_menu__submenu}>
-                                    <li className={styles.vertical_menu__submenu_item}>
-                                        <a href="#" className={`${styles.link} ${styles.vertical_menu__submenu_name}`}>
-                                            {el.type}
-                                        </a>
-                                    </li>
-                                    <li className={styles.vertical_menu__submenu_item}>
-                                        <a href="#" className={`${styles.link} ${styles.vertical_menu__submenu_name}`}>
-                                            {el.type}
-                                        </a>
-                                    </li>
-                                </ul>
-                            </li>
-                            })
-                        })} */}
-                        {Object.keys(mainData).map(el=>{
-                            return <div>{el}</div>
-                        })}
                     </ul>
+
+                    {items.map(el => {
+                        return <div>
+                            <ul>
+                                <li style={{fontSize:"20px"}}>{el.title}</li>
+                                <ul>
+                                    {el.type.map(el=>{
+                                      return <li style={{color:"red"}}>{el.title}</li>
+                                    })}
+                                </ul>
+                            </ul>
+                        </div>
+                    })}
                 </div>
                 {/* <div className={styles.dropdown_menu__menu_col}>
                     <ul className={styles.vertical_menu}>

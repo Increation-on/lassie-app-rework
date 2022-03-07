@@ -348,7 +348,7 @@ ul {
     left: 0;
     top: 100%;
     z-index: 200;
-    display: none;
+    display: flex;
     width: 100%;
     visibility: visible;
 }
@@ -398,9 +398,9 @@ img {
     line-height: 2;
 }
 
-.header__bottom:hover .dropdown_menu{
+/* .header__bottom:hover .dropdown_menu{
     display: block;
-}
+} */
 
 .header__logo_dis {
     pointer-events: none;

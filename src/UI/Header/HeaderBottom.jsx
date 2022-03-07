@@ -25,12 +25,12 @@ const HeaderBottom = () => {
                     <ul className={`${styles.header__menu} ${styles.menu} ${styles.menu_width_full}`}>
                         {menu.map((el) => {
                             return (
-                                <li  className={styles.menu__item} key={el.id}>
+                                <li onMouseEnter={()=>setIsShow(true)} onMouseLeave={()=>setIsShow(false)}  className={styles.menu__item} key={el.id}>
                                     {el.title === "Распродажа" ? <a href="#" className={`${styles.header__sale_wrapper} ${styles.menu__name}`}>
                                             <span className={styles.header__sale}>{el.title}</span>
                                         </a>
                                      : <a href="#" className={styles.menu__name}>{el.title}</a>}
-                                     < HeaderDropdownMenu items={el.item} />
+                                     {show?< HeaderDropdownMenu items={el.item} />:null}
                                 </li>   
                             )
                         })}
