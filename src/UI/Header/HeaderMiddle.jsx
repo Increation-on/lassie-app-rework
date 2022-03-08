@@ -1,7 +1,7 @@
 import styles from '../styles/Header.module.css';
 import { useSelector } from 'react-redux';
 import Logo from './Logo';
-import { useLocation } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { midInfoFirst, midInfoSecond, midTelFirst, midTelSecond } from '../../configs/contacts';
 import HeaderMidContatcs from './HeaderMidContatcs';
 
@@ -9,14 +9,14 @@ import HeaderMidContatcs from './HeaderMidContatcs';
 const HeaderMiddle = (props) => {
 
     const location = useLocation();
-
-    const amount = useSelector(state => state.amount.amount);
     const totalPrice = useSelector(state => state.totalPrice.totalPrice);
+    const totalAmount = useSelector(state => state.totalAmount.totalAmount);
+    
 
     return (
         <div className={styles.header__middle}>
             <div className={`${styles.container} ${styles.header__container} ${styles.header__container_middle}`}>
-                <Logo location={location.pathname}/>
+                <Logo location={location.pathname} />
                 <div className={styles.header__contacts}>
                     <span className={`${styles.header__icon} ${styles.icon_comment}`}></span>
                     <HeaderMidContatcs tel={midTelFirst} info={midInfoFirst} />
@@ -30,12 +30,11 @@ const HeaderMiddle = (props) => {
                 <div className={`${styles.header__col} ${styles.header__col_basket}`}>
                     <span className={`${styles.header__icon} ${styles.icon_bag}`}></span>
                     <div className={styles.header__basket}>
-                        <div className={styles.text}>{!amount && !totalPrice ? <span>Ваша корзина пуста</span> : <span>В вашей корзине</span>}</div>
-                        {!amount && !totalPrice ? null : <a href="#" className={styles.link}>
-                            {amount} {amount == 1 ? <span>товар</span> :
-                                amount > 1 && amount <= 4 ? <span>товара</span> :
-                                    amount > 4 ? <span>товаров</span> : null} на {totalPrice} руб.</a>}
-
+                        <div className={styles.text}>{!totalAmount && !totalPrice ? <span>Ваша корзина пуста</span> : <span>В вашей корзине</span>}</div>
+                        {!totalAmount && !totalPrice ? null : <Link to="/order" className={styles.link}>
+                            {totalAmount} {totalAmount == 1 ? <span>товар</span> :
+                                totalAmount > 1 && totalAmount <= 4 ? <span>товара</span> :
+                                    totalAmount > 4 ? <span>товаров</span> : null} на {totalPrice} руб.</Link>}
                     </div>
                 </div>
             </div>

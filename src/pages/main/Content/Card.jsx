@@ -1,34 +1,54 @@
 import styles from '../styles/Main.module.css';
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { addAmountAction, addPriceAction } from '../../../store/reducers/basketReducer';
+import { decrementProductCountAction, incrementProductCountAction, addSumTotalPriceAction, addSumTotalAmountAction } from '../../../store/reducers/basketReducer';
 
 const Card = (props) => {
 
     const dispatch = useDispatch();
+    // const amount = useSelector(state => state.amount.amount);
+    // const price = useSelector(state => state.price.price);
 
-    const [amount, setAmount] = useState(0);
-    const [price, setPrice] = useState(props.price);
-    
+    // const totalPrice = useSelector(state => state.totalPrice.totalPrice);
 
-    const decrementAmount = () => {
-        setAmount(amount - 1);
-        if (amount <= 0) {
-            setAmount(0)
+    // const incrementProductCount = (priceValue) => {
+    //     dispatch(incrementProductCountAction(priceValue));
+    //     console.log(price);
+    //     console.log(amount);
+    // }
+
+    // const decrementProductCount = (priceValue) => {
+    //     dispatch(decrementProductCountAction(priceValue));
+    //     console.log(price);
+    // }
+
+    const [count, setCount] = useState(0);
+    const [productPrice, setProductPrice] = useState(null);
+
+    const increment = () => {
+        setCount(count + 1);
+        setProductPrice(productPrice + props.price);
+    }
+
+    const decrement = () => {
+        setCount(count - 1);
+        setProductPrice(productPrice - props.price);
+        if (count <= 0) {
+            setCount(0);
+            setProductPrice(null)
         }
     }
 
-    const sumPriceAndAmount = () => {
-        setAmount(amount+1);
-        setPrice(price);
+
+
+    const setBasket = (price, amount) => {
+        dispatch(addSumTotalPriceAction(price));
+        dispatch(addSumTotalAmountAction(amount));
+        
+        setCount(0);
     }
 
 
-    const setBasket = (value) => {
-        dispatch(addAmountAction(value));
-        dispatch(addPriceAction(price));
-        setAmount(0);
-    }
 
 
     return (
@@ -75,14 +95,14 @@ const Card = (props) => {
                         <div className={styles.good__order_row}>
                             <label htmlFor="good0-num" className={styles.good__order_label}>Количество</label>
                             <div className={styles.input_number}>
-                                <input id="good0-num" name="Good[number]" type="number" disabled={true} value={amount} step="1" min="1" required="" className={styles.input_number__elem} />
+                                <input id="good0-num" name="Good[number]" type="number" disabled={true} value={count} step="1" min="1" required="" className={styles.input_number__elem} />
                                 <div className={styles.input_number__counter}>
-                                    <span onClick={sumPriceAndAmount} className={`${styles.input_number__counter_spin} ${styles.input_number__counter_spin_more}`}>Больше</span>
-                                    <span onClick={decrementAmount} className={`${styles.input_number__counter_spin} ${styles.input_number__counter_spin_less}`}>Меньше</span>
+                                    <span onClick={increment} className={`${styles.input_number__counter_spin} ${styles.input_number__counter_spin_more}`}>Больше</span>
+                                    <span onClick={decrement} className={`${styles.input_number__counter_spin} ${styles.input_number__counter_spin_less}`}>Меньше</span>
                                 </div>
                             </div>
                         </div>
-                        <button onClick={() => setBasket(amount)} type="button" className={styles.btn}>Добавить в корзину</button>
+                        <button onClick={() => setBasket(productPrice, count)} type="button" className={styles.btn}>Добавить в корзину</button>
                     </form>
                 </div>
             </article>

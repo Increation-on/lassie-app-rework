@@ -1,4 +1,4 @@
-import styles from '../styles/Order.module.css';
+import styles from '../../styles/Order.module.css';
 import { useForm } from 'react-hook-form';
 import { useState, useEffect } from 'react';
 

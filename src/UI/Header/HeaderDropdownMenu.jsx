@@ -6,7 +6,7 @@ import { type } from '@testing-library/user-event/dist/type';
 const HeaderDropdownMenu = (props) => {
 
    const items = props.items;
-   console.log(items);
+//    console.log(items);
     
 
     return (
@@ -17,7 +17,7 @@ const HeaderDropdownMenu = (props) => {
                 </div>
                 <div className={styles.dropdown_menu__menu_col}>
                     <ul className={styles.vertical_menu}>
-                        {/* {items.map(item => {
+                        {items.map(item => {
                             return <li key={item.id} className={styles.vertical_menu__item}>
                                 {item.type.length > 0 ? <span className={styles.vertical_menu__name}>{item.title}</span> :
                                     <a href="#" className={styles.vertical_menu__name}>{item.title}</a>}
@@ -29,10 +29,10 @@ const HeaderDropdownMenu = (props) => {
                                     </li>
                                 </ul>
                             </li>
-                        })} */}
+                        })}
                     </ul>
 
-                    {items.map(el => {
+                    {/* {items.map(el => {
                         return <div>
                             <ul>
                                 <li style={{fontSize:"20px"}}>{el.title}</li>
@@ -43,7 +43,7 @@ const HeaderDropdownMenu = (props) => {
                                 </ul>
                             </ul>
                         </div>
-                    })}
+                    })} */}
                 </div>
                 {/* <div className={styles.dropdown_menu__menu_col}>
                     <ul className={styles.vertical_menu}>

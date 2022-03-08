@@ -7,7 +7,9 @@ import { basketReducer } from './reducers/basketReducer';
 const rootReducer = combineReducers({
     products: productReducer,
     amount: basketReducer,
-    totalPrice: basketReducer
+    price: basketReducer,
+    totalPrice: basketReducer,
+    totalAmount: basketReducer
 })
 
 
