@@ -247,6 +247,11 @@ ul {
     background-color: rgb(0, 118, 189);
 }
 
+.menu_width_full .menu__item {
+    -webkit-box-flex: 1;
+    flex-grow: 1;
+}
+
 .header__bottom::before {
     content: "";
     position: absolute;
@@ -348,7 +353,7 @@ ul {
     left: 0;
     top: 100%;
     z-index: 200;
-    display: flex;
+    display: none;
     width: 100%;
     visibility: visible;
 }
@@ -398,9 +403,9 @@ img {
     line-height: 2;
 }
 
-/* .header__bottom:hover .dropdown_menu{
+.header__bottom:hover .dropdown_menu{
     display: block;
-} */
+}
 
 .header__logo_dis {
     pointer-events: none;
@@ -457,7 +462,7 @@ img {
 	content: '\e803'
 }
 
-.icon-mail::before {
+.icon_mail::before {
 	content: '\e804'
 }
 

@@ -1,5 +1,12 @@
 
-const CardInfo = () => {
+const CardInfo = (props) => {
+
+    // console.log(props.sizes);
+
+    // props.sizes.map(el => {
+    //     console.log(el)
+    // })
+
     return (
         <div className="card__info">
             <header className="card__info-header"><span className="flag flag_type_new">new</span>
@@ -22,6 +29,12 @@ const CardInfo = () => {
                 <div className="card__content-block">
                     <div className="card__subtitle text">Выберите размер:</div>
                     <div className="card__content-row card__content-row_checkboxes">
+                        {/* {props.sizes.map(el => {
+                            return <div className="checkbox-tile checkbox-tile_size_extra">
+                                        <input id="card-size-1" name="Card[size]" type="radio" value={el} required className="checkbox-tile__elem" />
+                                        <label htmlFor="card-size-1" className="checkbox-tile__label">{el}</label>
+                                    </div>
+                        })} */}
                         <div className="checkbox-tile checkbox-tile_size_extra">
                             <input id="card-size-1" name="Card[size]" type="radio" value="50" required className="checkbox-tile__elem" />
                             <label htmlFor="card-size-1" className="checkbox-tile__label">50</label>
@@ -62,7 +75,8 @@ const CardInfo = () => {
                             <input id="card-size-10" name="Card[size]" type="radio" value="101" required className="checkbox-tile__elem" />
                             <label htmlFor="card-size-10" className="checkbox-tile__label">101</label>
                         </div>
-                    </div><a href="#" className="link text">Сообщить о поступлении размера</a>
+                    </div>
+                    <a href="#" className="link text">Сообщить о поступлении размера</a>
                 </div>
                 <div className="card__content-block card__content-block_margin_30">
                     <div className="card__subtitle text">Количество:</div>

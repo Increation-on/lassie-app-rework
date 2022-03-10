@@ -1,16 +1,16 @@
 
-const Gallery = () => {
+const Gallery = (props) => {
     return (
         <div className="card__photos gallery">
             <div className="gallery__display">
-                <img src="http://lorempixel.com/570/525/animals/1" width="570" height="525" alt="" className="gallery__display-img" />
+                <img src={require('../../images/good-1.jpg')} width="570" height="525" alt="" className="gallery__display-img" />
             </div>
             <div className="gallery__thumbnails-container">
                 <ul className="gallery__thumbnails">
-                    <li className="gallery__thumbnails-item gallery__thumbnails-item_active">
-                        <img src="http://lorempixel.com/570/525/animals/1" alt="" className="gallery__thumbnails-img" />
-                    </li>
-                    <li className="gallery__thumbnails-item">
+                    {/* <li className="gallery__thumbnails-item gallery__thumbnails-item_active">
+                        <img src={"http://lorempixel.com/570/525/animals/1"} alt="" className="gallery__thumbnails-img" />
+                    </li> */}
+                    {/* <li className="gallery__thumbnails-item">
                         <img src="http://lorempixel.com/570/525/animals/2" alt="" className="gallery__thumbnails-img" />
                     </li>
                     <li className="gallery__thumbnails-item">
@@ -30,7 +30,12 @@ const Gallery = () => {
                     </li>
                     <li className="gallery__thumbnails-item">
                         <img src="http://lorempixel.com/570/525/animals/8" alt="" className="gallery__thumbnails-img" />
-                    </li>
+                    </li> */}
+                    {props.prod.map(el => {
+                        return <li key={el.id} className="gallery__thumbnails-item">
+                            <img src={el.img} alt="prod" className="gallery__thumbnails-img" />
+                        </li>
+                    })}
                 </ul>
             </div>
         </div>

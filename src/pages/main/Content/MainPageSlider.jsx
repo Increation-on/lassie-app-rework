@@ -1,5 +1,5 @@
-import '../../../style/app.min.css';
 import slide from '../../../images/slider-1.jpg'
+
 const MainPageSlider = (props) => {
     return (
         <div className="index__slider slider">

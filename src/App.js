@@ -4,6 +4,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import AppRouter from "./router/AppRouter";
 import ErrorPage from './pages/error/ErrorPage';
 
+
 const App = () => {
 
   return (

@@ -5,6 +5,7 @@ import Gallery from "./Gallery";
 import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { fetchProducts } from "../../store/asyncActions/asyncProducts";
+import { Link } from "react-router-dom";
 
 
 const ProductPage = () => {
@@ -17,11 +18,12 @@ const ProductPage = () => {
         dispatch(fetchProducts());
     }, []);
 
+
     return (
         <main className="content product-page">
             <div className="container">
                 <ul className="breadcrumbs">
-                    <li className="breadcrumbs__item"><a href="#" className="breadcrumbs__name">Главная</a>
+                    <li className="breadcrumbs__item"><Link to="/main" className="breadcrumbs__name">Главная</Link>
                     </li>
                     <li className="breadcrumbs__item"><a href="#" className="breadcrumbs__name">Аксессуары</a>
                     </li>
@@ -30,8 +32,10 @@ const ProductPage = () => {
                 </ul>
                 <div className="card product-page__card">
                     <div className="card__top">
-                        <Gallery />
-                        <CardInfo />
+                        <Gallery prod = {products} />
+                        <CardInfo sizes = {products.map(el=>{
+                            return el.sizes
+                        })} />
                     </div>
                     <CardTabs />
                     <article className="product-page__section">
@@ -39,7 +43,7 @@ const ProductPage = () => {
                         <ul className="goods product-page__goods">
                             {products.map((el) => {
                                 while (el.id <= 4) {
-                                    return <Card key={el.id} price={el.price} name={el.title} img={el.img} />
+                                    return <Card key={el.id} price={el.price} name={el.title} img={el.img} sizes={el.sizes} />
                                 }
                             })}
                         </ul>
@@ -49,7 +53,7 @@ const ProductPage = () => {
                         <ul className="goods product-page__goods">
                             {products.map((el) => {
                                 while (el.id <= 4) {
-                                    return <Card key={el.id} price={el.price} name={el.title} img={el.img} />
+                                    return <Card key={el.id} price={el.price} name={el.title} img={el.img} sizes={el.sizes}/>
                                 }
                             })}
                         </ul>

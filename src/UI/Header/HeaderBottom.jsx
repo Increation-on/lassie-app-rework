@@ -1,46 +1,54 @@
-import { useState } from 'react';
-import styles from '../styles/Header.module.css';
-import HeaderDropdownMenu from './HeaderDropdownMenu';
-import { useEffect } from 'react';
+import HDDM from "./HeaderDropdownMenu";
+import { useState, useEffect } from 'react';
 import axios from 'axios';
 
+
 const HeaderBottom = () => {
-    const [menu, setMenu] = useState([]);
+
+    const [menu, setMenu] = useState([])
 
     useEffect(() => {
-        axios.get(`mocks/hBN.json`).then(response => {      
+        axios.get(`mocks/hBN.json`).then(response => {
             const data = response.data;
             setMenu(data);
         })
     }, []);
 
-    const [show, setIsShow] = useState(false);
+    
+    const buttonMenu = [...menu].reverse();
 
     
-
     return (
-        <div className={styles.header__bottom}>
-            <div className={styles.container}>
-                <nav className={`${styles.header__nav} ${styles.navigation}`}>
-                    <ul className={`${styles.header__menu} ${styles.menu} ${styles.menu_width_full}`}>
-                        {menu.map((el) => {
-                            return (
-                                <li onMouseEnter={()=>setIsShow(true)} onMouseLeave={()=>setIsShow(false)}  className={styles.menu__item} key={el.id}>
-                                    {el.title === "Распродажа" ? <a href="#" className={`${styles.header__sale_wrapper} ${styles.menu__name}`}>
-                                            <span className={styles.header__sale}>{el.title}</span>
-                                        </a>
-                                     : <a href="#" className={styles.menu__name}>{el.title}</a>}
-                                     {show?< HeaderDropdownMenu items={el.item} />:null}
-                                </li>   
-                            )
-                        })}
-                        
+        <div className="header__bottom">
+            <div className="container">
+                <nav className="header__nav navigation">
+                    <ul className="header__menu menu menu_width_full">
+                        {menu.map(el => {
+                            return  <li key={el.id} className="menu__item">
+                                        {el.sale?
+                                            <a href="#" className="header__sale-wrapper menu__name">
+                                                <span className="header__sale">{el.title}</span></a>:
+                                            <a href="#" className="menu__name">{el.title}</a>
+                                        }
+                                        <HDDM item = {el.item} menuId={el.id} />
+                                    </li>
+                        })} 
                     </ul>
+                    <button className="burger-btn header__nav-btn js-nav-btn"><span className="burger-btn__switch">Развернуть меню </span>
+                    </button>
+                    <div className="navigation__collapse">
+                        <ul className="navigation__collapse-menu vertical-menu">
+                            {buttonMenu.map(el=> {
+                                return <li key={el.id} className="navigation__collapse-item vertical-menu__item">
+                                            <a href="#" className="vertical-menu__name">{el.title}</a>
+                                        </li>
+                            })}
+                        </ul>
+                    </div>
                 </nav>
             </div>
         </div>
     )
 }
-
 
 export default HeaderBottom;

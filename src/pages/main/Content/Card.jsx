@@ -2,6 +2,7 @@ import styles from '../styles/Main.module.css';
 import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { decrementProductCountAction, incrementProductCountAction, addSumTotalPriceAction, addSumTotalAmountAction } from '../../../store/reducers/basketReducer';
+import { Link, NavLink } from 'react-router-dom';
 
 const Card = (props) => {
 
@@ -44,21 +45,45 @@ const Card = (props) => {
     const setBasket = (price, amount) => {
         dispatch(addSumTotalPriceAction(price));
         dispatch(addSumTotalAmountAction(amount));
-        
         setCount(0);
+        setProductPrice(null);
     }
-
-
-
 
     return (
         <li className={styles.goods__item}>
             <article className={styles.good}>
                 <div className={styles.good__content}>
-                    <a href="#" className={styles.good__link}>
+                    {props.name === "Зимний комбинезон для новорожденных Grian"
+                        ? <Link to={`${props.url}`} className={styles.good__link}>
+                            <img src={props.img} alt="товар" className={styles.good__img} />
+                            <span className={`${styles.flag} ${styles.flag_type_new}`}>new</span>
+                        </Link> 
+                        : props.name === "Кросовки Reimatec® для детей Wetter"? 
+                        <Link to={`${props.url}`} className={styles.good__link}>
+                            <img src={props.img} alt="товар" className={styles.good__img} />
+                            <span className={`${styles.flag} ${styles.flag_type_new}`}>new</span>
+                        </Link>
+                        : props.name === "Детская зимняя куртка Reimatec® Dinkar" ?
+                        <Link to={`${props.url}`}  className={styles.good__link}>
+                            <img src={props.img} alt="товар" className={styles.good__img} />
+                            <span className={`${styles.flag} ${styles.flag_type_new}`}>new</span>
+                        </Link>
+                        : props.name === "Пинетки для новорожденных Neuvo"?
+                        <Link to={`${props.url}`} className={styles.good__link}>
+                            <img src={props.img} alt="товар" className={styles.good__img} />
+                            <span className={`${styles.flag} ${styles.flag_type_new}`}>new</span>
+                        </Link> 
+                        :props.name === "Шапка-бини для новорожденных Hilal"?
+                        <Link to={`${props.url}`}  className={styles.good__link}>
+                            <img src={props.img} alt="товар" className={styles.good__img} />
+                            <span className={`${styles.flag} ${styles.flag_type_new}`}>new</span>
+                        </Link> 
+                        :null                                      
+                    }
+                    {/* <Link to="/product" className={styles.good__link}>
                         <img src={props.img} alt="товар" className={styles.good__img} />
                         <span className={`${styles.flag} ${styles.flag_type_new}`}>new</span>
-                    </a>
+                    </Link> */}
                     <a href="#" className={styles.like}>Мне нравится</a>
                     <h4 className={styles.good__name}>{props.name}</h4>
                     <div className={styles.good__price_wrapper}>
@@ -71,7 +96,13 @@ const Card = (props) => {
                     <form method="post" action="" className={`${styles.form} ${styles.good__order}`}>
                         <div className={styles.good__order_row}>
                             <label className={styles.good__order_label}>Выберите размер</label>
-                            <div className={styles.checkbox_title}>
+                            {props.sizes.map(el=>{
+                                return  <div className={styles.checkbox_title}>
+                                            <input id="good0-size0" name="Good[size]" type="radio" value={el} required="" className={styles.checkbox_title__elem} />
+                                            <label htmlFor="good0-size0" className={styles.checkbox_title__label}>{el}</label>
+                                         </div>
+                            })}
+                            {/* <div className={styles.checkbox_title}>
                                 <input id="good0-size0" name="Good[size]" type="radio" value="74" required="" className={styles.checkbox_title__elem} />
                                 <label htmlFor="good0-size0" className={styles.checkbox_title__label}>74</label>
                             </div>
@@ -90,7 +121,7 @@ const Card = (props) => {
                             <div className={styles.checkbox_title}>
                                 <input id="good0-size4" name="Good[size]" type="radio" value="98" required="" className={styles.checkbox_title__elem} />
                                 <label htmlFor="good0-size4" className={styles.checkbox_title__label}>98</label>
-                            </div>
+                            </div> */}
                         </div>
                         <div className={styles.good__order_row}>
                             <label htmlFor="good0-num" className={styles.good__order_label}>Количество</label>
