@@ -3,14 +3,14 @@ import axios from 'axios';
 import { useState, useEffect } from 'react';
 import { NavLink } from 'react-router-dom';
 import Search from './Search';
-import '../../style/app.min.css';
+
 
 const HeaderTop = (props) => {
 
     const [menu, setMenu] = useState([]);
     
     useEffect( () =>{
-        axios.get(`mocks/headerTopNav.json`).then(response=>{
+        axios.get(`/mocks/headerTopNav.json`).then(response=>{
             const data = response.data;
             setMenu(data);
         })

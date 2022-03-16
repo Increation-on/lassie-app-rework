@@ -1,5 +1,10 @@
+import { useEffect } from "react";
 
-const CardTabs = () => {
+const CardTabs = (props) => {
+
+    const product = props.prod;
+
+
     return (
         <div className="card__tabs tabs">
             <ul className="tabs__nav">
@@ -14,25 +19,38 @@ const CardTabs = () => {
             </ul>
             <div className="tabs__content-wrapper">
                 <div data-tab='1' className="tabs__content tabs__content_active">
-                    <div className="card__content-block">
-                        <p className="text">Как насчет сна? Эта удобная шапочка идеально подходит для всех маленьких мечтателей и сонных медведей! Благодаря вязке из теплой шерстяной смеси в сочетании с мягкой флисовой подкладкой на внутренней стороне, эта шапочка подходит для ежедневного
-                            использования. Сочетание с варежками Nyytti и пинетками Neuvo завершит образ!</p>
-                    </div>
-                    <ul className="list list_markers">
-                        <li className="list__item list__item_marker_orange text">Детская шапочка, теплая шерстяная вязка</li>
-                        <li className="list__item list__item_marker_orange text">Мягкая теплая подкладка из флиса</li>
-                        <li className="list__item list__item_marker_orange text">Ветронепроницаемые вставки в области ушей</li>
-                        <li className="list__item list__item_marker_orange text">Сочетается в варежками “Nyytti” и пинетками “Neuvo”</li>
+                    {product && product.description ?
+                        product.description.map(el => {
+                            return (
+                                    <div className="card__content-block">
+                                        <p className="text">{el.main}</p>
+                                    </div>
+                            )
+                        }) : null
+                    }
+                     <ul className="list list_markers">
+                        {product && product.description?
+                            product.description[1].thesis.map(el=>{
+                                return <li className="list__item list__item_marker_orange text">{el.title}</li> 
+                            }) : null
+                        }
                     </ul>
                 </div>
                 <div data-tab='2' className="tabs__content">
                     <ul className="list list_markers">
-                        <li className="list__item list__item_marker_orange text">90% шерсть</li>
-                        <li className="list__item list__item_marker_orange text">10% слёзы китайских детей</li>
+                        {product?
+                             product.material.map(el=>{
+                                return  <li className="list__item list__item_marker_orange text">{el.title}</li>
+                            }): null    
+                    }
                     </ul>
                 </div>
                 <div data-tab='3' className="tabs__content">
-                    <p className="text">Главное, не давайте носить ее вашему папе, а то она растянется и потеряет вид!</p>
+                {product?
+                             product.description.map(el=>{
+                                return   <p className="text">{el.care}</p>
+                            }): null    
+                    }
                 </div>
                 <div data-tab='4' className="tabs__content">
                     <div className="reviews">

@@ -1,19 +1,38 @@
 import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { fetchProducts } from "../../store/asyncActions/asyncProducts";
-import Card from "../main/Content/Card";
+import ProductCard from "../main/Content/ProductCard";
 import CatalogSort from "./CatalogSort";
 import Filter from "./Filter";
+import { showAllGoodsAction, showMoreGoodsAction } from "../../store/reducers/sortReducer";
 
 const CatalogPage = () => {
 
     const products = useSelector(state => state.products.products);
+    const goodsNumber = useSelector(state => state.productDisplayNum.productDisplayNum);
+    const sortCategory = useSelector(state => state.productSortCategory.productSortCategory);
     const dispatch = useDispatch();
-
 
     useEffect(() => {
         dispatch(fetchProducts());
     }, []);
+
+    const sortByPrice = (arr) => {
+        arr.sort((a, b)=> a.price > b.price ? 1 : -1);
+    }
+
+    switch(sortCategory){
+        case "price":
+            sortByPrice(products);
+            break;
+        default: 
+            dispatch(fetchProducts());      
+    }   
+
+
+    
+
+    
 
 
     return (
@@ -36,11 +55,28 @@ const CatalogPage = () => {
                         <div className="catalog__goods-wrapper">
                             <ul className="goods">
                                 {products.map((el) => {
-                                    return <Card key={el.id} price={el.price} name={el.title} img={el.img} />
+                                    while(el.id <= goodsNumber){
+                                        
+                                        return <ProductCard 
+                                            key={el.id}
+                                            id={el.id}
+                                            price={el.price}
+                                            name={el.title}
+                                            img={el.img}
+                                            url={el.url}
+                                            sizes={el.sizes}
+                                            mark={el.mark}
+                                            discount={el.discount} />
+                                    }       
                                 })}
                             </ul>
                         </div>
-                        <div className="catalog__more"><a href="#" className="catalog__more-btn link"><span className="icon-load"></span>Загрузить еще 12 товаров</a><a href="#" className="link text">Показать все</a>
+                        <div className="catalog__more">
+                            <span onClick={()=>dispatch(showMoreGoodsAction(goodsNumber + 12))} style={{cursor:"pointer"}} className="catalog__more-btn link">
+                                <span className="icon-load"></span>
+                                Загрузить еще 12 товаров
+                            </span>
+                                <span onClick={()=>dispatch(showAllGoodsAction(products.length))} style={{cursor: 'pointer'}} className="link text">Показать все</span>
                         </div>
                     </div>
                 </div>

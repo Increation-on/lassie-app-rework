@@ -1,6 +1,17 @@
-
+import { useDispatch, useSelector  } from "react-redux";
+import OrderList from "./OrderList";
+import { useEffect } from "react";
+import { fetchProducts } from "../../../store/asyncActions/asyncProducts";
 
 const Order = () => {
+
+    const products = useSelector(state => state.products.products);
+    const dispatch = useDispatch()
+
+    useEffect(()=>{
+        dispatch(fetchProducts())
+    }, [])
+
     return (
         <div className="container">
             <ul className="breadcrumbs">
@@ -137,89 +148,10 @@ const Order = () => {
                             <label htmlFor="order-payment-2" className="form__label radio__label">Электронные платежи</label>
                     </div>
                 </fieldset>
-                <fieldset className="form__fieldset">
-                    <legend className="form__title">Состав заказа</legend>
-                    <div className="goods-table">
-                        <div className="goods-table__header">
-                            <div className="goods-table__header-row">
-                                <div className="goods-table__heading">Товары</div>
-                                <div className="goods-table__heading">Скидка</div>
-                                <div className="goods-table__heading">Цена</div>
-                                <div className="goods-table__heading">Количество</div>
-                                <div className="goods-table__heading">Сумма</div>
-                            </div>
-                        </div>
-                        <div className="goods-table__main">
-                            <div className="goods-table__row">
-                                <div className="goods-table__cell">
-                                    <div className="goods-table__col">
-                                        <div className="goods-table__img-wrapper">
-                                            <img src="assets/images/order-good-1.jpg" alt="" className="goods-table__img"/>
-                                        </div>
-                                    </div>
-                                    <div className="goods-table__col">
-                                        <div className="goods-table__text">Зимняя шапка с подкладом из флиса Carina</div>
-                                        <div className="goods-table__info">518245-4140-046</div>
-                                        <div className="goods-table__info">Размер: 046</div>
-                                    </div>
-                                </div>
-                                <div className="goods-table__cell"></div>
-                                <div className="goods-table__cell">
-                                    <div className="goods-table__text">1299 руб.</div>
-                                </div>
-                                <div className="goods-table__cell">
-                                    <div className="goods-table__text">1 шт.</div>
-                                </div>
-                                <div className="goods-table__cell">
-                                    <div className="goods-table__text">1299 руб.</div>
-                                </div>
-                            </div>
-                            <div className="goods-table__row">
-                                <div className="goods-table__cell">
-                                    <div className="goods-table__col">
-                                        <div className="goods-table__img-wrapper">
-                                            <img src="assets/images/order-good-2.jpg" alt="" className="goods-table__img"/><span className="flag flag_type_sale">sale</span>
-                                        </div>
-                                    </div>
-                                    <div className="goods-table__col">
-                                        <div className="goods-table__text">Детская зимняя куртка Reimatec<sup>®</sup> Roxana</div>
-                                        <div className="goods-table__info">521430B-5551-092</div>
-                                        <div className="goods-table__info">Размер: 092</div>
-                                    </div>
-                                </div>
-                                <div className="goods-table__cell">
-                                    <div className="goods-table__text goods-table__text_discount">20%</div>
-                                </div>
-                                <div className="goods-table__cell">
-                                    <div className="goods-table__text">7499 руб.</div>
-                                </div>
-                                <div className="goods-table__cell">
-                                    <div className="goods-table__text">1 шт.</div>
-                                </div>
-                                <div className="goods-table__cell">
-                                    <div className="goods-table__text goods-table__text_discount">5999 руб.</div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </fieldset>
-                <div className="form__total">
-                    <div className="form__col-right">
-                        <div className="form__total-row form__total-row_goods-cost"><span className="form__total-item">Товаров на сумму:</span><span className="form__total-item">7 298 руб.</span>
-                        </div>
-                        <div className="form__total-row form__total-row_tax"><span className="form__total-item">В том числе НДС:</span><span className="form__total-item">805 руб.</span>
-                        </div>
-                        <div className="form__total-row form__total-row_general"><span className="form__total-item">Итого</span>
-                            <div className="form__total-item form__total-item_sum">7 298 руб.</div>
-                        </div>
-                        <p>Заполнение вышеуказанных данных является необходимым для оформления Заказа и осуществления доставки. Все данные находятся на территории РФ, согласно Законодательству РФ.</p>
-                        <p>Предоставляя свои персональные данные при оформлении Заказа, подтверждаю свое согласие на обработку моих персональных данных, а также на аудиозапись своего общения с представителями Сайта в период оформления Заказа и исполнения обязательств согласно
-                            <a
-                                href="#" className="link">Пользовательскому Соглашению.</a>
-                        </p>
-                    </div>
-                </div>
-                <button type="submit" className="btn form__btn form__btn_align_right">Оформить заказ</button>
+
+                <OrderList />
+
+                
             </form>
         </div>
 

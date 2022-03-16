@@ -1,6 +1,7 @@
 import HDDM from "./HeaderDropdownMenu";
 import { useState, useEffect } from 'react';
 import axios from 'axios';
+import { Link } from "react-router-dom";
 
 
 const HeaderBottom = () => {
@@ -8,7 +9,7 @@ const HeaderBottom = () => {
     const [menu, setMenu] = useState([])
 
     useEffect(() => {
-        axios.get(`mocks/hBN.json`).then(response => {
+        axios.get(`/mocks/hBN.json`).then(response => {
             const data = response.data;
             setMenu(data);
         })
@@ -28,7 +29,7 @@ const HeaderBottom = () => {
                                         {el.sale?
                                             <a href="#" className="header__sale-wrapper menu__name">
                                                 <span className="header__sale">{el.title}</span></a>:
-                                            <a href="#" className="menu__name">{el.title}</a>
+                                            <Link to={el.path} className="menu__name">{el.title}</Link>
                                         }
                                         <HDDM item = {el.item} menuId={el.id} />
                                     </li>

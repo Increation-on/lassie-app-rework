@@ -18,7 +18,7 @@ export const router = [
     { path:"/delivery", Component: Delivery },
     { path:"/payment", Component: Payment },
     { path:"/order", Component: OrderPage },
-    { path:"/product", Component: ProductPage },
+    { path:"/product/:id", Component: ProductPage },
     { path:"/card", Component: ProductCard }
 
 ]

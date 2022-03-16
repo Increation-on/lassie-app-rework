@@ -10,7 +10,7 @@ const MainPageSlider = (props) => {
 							<br/>с новой коллекцией</div>
 					</li>
 					<li className="slider__item">
-						<img src="assets/images/slider-1.jpg" alt="" className="slider__img"/>
+						<img src={slide} alt="" className="slider__img"/>
 						<div className="index__slider-title">Встречаем осень
 							<br/>с новой коллекцией</div>
 					</li>

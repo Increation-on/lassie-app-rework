@@ -2,14 +2,16 @@ import { createStore, combineReducers, applyMiddleware } from 'redux';
 import { composeWithDevTools } from '@redux-devtools/extension';
 import thunk from 'redux-thunk';
 import { productReducer } from './reducers/productReducer';
-import { basketReducer } from './reducers/basketReducer';
+import { productInfoReducer } from './reducers/productInfoReducer';
+import { sortReducer } from './reducers/sortReducer';
 
 const rootReducer = combineReducers({
+    productSortCategory: sortReducer,
+    productDisplayNum: sortReducer,
     products: productReducer,
-    amount: basketReducer,
-    price: basketReducer,
-    totalPrice: basketReducer,
-    totalAmount: basketReducer
+    totalPrice: productInfoReducer,
+    totalAmount: productInfoReducer,    
+    productInfo: productInfoReducer
 })
 
 

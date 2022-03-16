@@ -9,8 +9,16 @@ import HeaderMidContatcs from './HeaderMidContatcs';
 const HeaderMiddle = (props) => {
 
     const location = useLocation();
+    
     const totalPrice = useSelector(state => state.totalPrice.totalPrice);
     const totalAmount = useSelector(state => state.totalAmount.totalAmount);
+
+
+    localStorage.setItem("totalAmount", totalPrice);
+    localStorage.setItem("totalPrice", totalAmount);
+
+    const totalP = localStorage.getItem('totalPrice');
+    const totalA = localStorage.getItem('totalAmount');
     
 
     return (

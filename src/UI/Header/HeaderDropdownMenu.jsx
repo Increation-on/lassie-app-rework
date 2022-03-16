@@ -24,7 +24,6 @@ const HeaderDropdownMenu = (props) => {
                         })}
                     </ul>
                 </div>
-
                 <div className="dropdown-menu__menu-col">
                     <ul className="vertical-menu">
                         {props.item.map(el => {

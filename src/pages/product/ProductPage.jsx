@@ -1,11 +1,12 @@
-import Card from "../main/Content/Card";
 import CardInfo from "./CardInfo"
 import CardTabs from "./CardTabs";
 import Gallery from "./Gallery";
 import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { fetchProducts } from "../../store/asyncActions/asyncProducts";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
+import ProductCard from "../main/Content/ProductCard";
+import Popup from "./Popup";
 
 
 const ProductPage = () => {
@@ -18,8 +19,14 @@ const ProductPage = () => {
         dispatch(fetchProducts());
     }, []);
 
+    
 
-    return (
+    const params = useParams();
+    const paramsId = Number(params.id);
+   
+
+
+    return products? (
         <main className="content product-page">
             <div className="container">
                 <ul className="breadcrumbs">
@@ -32,18 +39,26 @@ const ProductPage = () => {
                 </ul>
                 <div className="card product-page__card">
                     <div className="card__top">
-                        <Gallery prod = {products} />
-                        <CardInfo sizes = {products.map(el=>{
-                            return el.sizes
-                        })} />
+                        <Gallery prod={products[paramsId-1]} />
+                        <CardInfo prod={products[paramsId-1]}/>
                     </div>
-                    <CardTabs />
+                    <CardTabs prod ={products[paramsId-1]} />
                     <article className="product-page__section">
                         <h2 className="heading product-page__title"><span className="heading__text">С этим товаром покупают</span></h2>
                         <ul className="goods product-page__goods">
                             {products.map((el) => {
                                 while (el.id <= 4) {
-                                    return <Card key={el.id} price={el.price} name={el.title} img={el.img} sizes={el.sizes} />
+                                    return <ProductCard
+                                        key={el.id}
+                                        id={el.id}
+                                        price={el.price}
+                                        name={el.title}
+                                        img={el.img}
+                                        url={el.url}
+                                        sizes={el.sizes}
+                                        mark={el.mark}
+                                        discount={el.discount} />
+                                        
                                 }
                             })}
                         </ul>
@@ -53,24 +68,26 @@ const ProductPage = () => {
                         <ul className="goods product-page__goods">
                             {products.map((el) => {
                                 while (el.id <= 4) {
-                                    return <Card key={el.id} price={el.price} name={el.title} img={el.img} sizes={el.sizes}/>
+                                    return <ProductCard
+                                        key={el.id}
+                                        id={el.id}
+                                        price={el.price}
+                                        name={el.title}
+                                        img={el.img}
+                                        url={el.url}
+                                        sizes={el.sizes}
+                                        mark={el.mark}
+                                        discount={el.discount} />
                                 }
                             })}
                         </ul>
                     </article>
-                    <div data-popup="good" className="popup">
-                        <div className="popup-good popup__content">
-                            <div className="popup-good__title">Товар добавлен в корзину</div>
-                            <img src="assets/images/popup-1.jpg" alt="Фото товара" className="popup-good__img" title="" />
-                            <p className="popup-good__desc text">Шапка-бини для новорожденных Nokoset</p>
-                            <div className="popup-good__row"><a href="#" className="btn btn_border js-popup-close popup-good__btn">Вернуться в каталог</a><a href="#" className="btn popup-good__btn">Оформить заказ</a>
-                            </div>
-                        </div>
-                    </div>
+                    <Popup prod={products[paramsId-1]}/>
                 </div>
             </div>
         </main>
-    )
+    ) : <div>Loading...</div>
+
 }
 
 export default ProductPage;
