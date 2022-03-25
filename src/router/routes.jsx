@@ -6,19 +6,21 @@ import Payment from '../pages/payment/Payment';
 import OrderPage from './../pages/order/OrderPage';
 import CatalogPage from '../pages/catalog/CatalogPage';
 import ProductPage from '../pages/product/ProductPage';
-import ProductCard from '../pages/main/Content/ProductCard';
+
 
 
 export const router = [
-    { path:'/main', Component: MainPage },
-    { path:'/catalog', Component: CatalogPage },
-    { path:"/", Component: MainPage },
-    { path:"*", Component: ErrorPage },
-    { path:"/about", Component: About },
-    { path:"/delivery", Component: Delivery },
-    { path:"/payment", Component: Payment },
-    { path:"/order", Component: OrderPage },
-    { path:"/product/:id", Component: ProductPage },
-    { path:"/card", Component: ProductCard }
-
+    { path:'/main', Component: MainPage,  id:1 },
+    { path:'/catalog', Component: CatalogPage, id:2 },
+    { path:"/", Component: MainPage, id:3 },
+    { path:"*", Component: ErrorPage, id:4 },
+    { path:"/about", Component: About, id:5 },
+    { path:"/delivery", Component: Delivery, id: 6 },
+    { path:"/payment", Component: Payment, id: 7 },
+    { path:"/order", Component: OrderPage, id:8 },
+    { path:"/product/:id", Component: ProductPage, id:9 },
+    { path:"/product", Component: ProductPage, id:10 },
+    
 ]
+
+

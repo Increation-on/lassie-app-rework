@@ -29,14 +29,17 @@ const ProductPage = () => {
     return products? (
         <main className="content product-page">
             <div className="container">
-                <ul className="breadcrumbs">
-                    <li className="breadcrumbs__item"><Link to="/main" className="breadcrumbs__name">Главная</Link>
+                {/* <ul className="breadcrumbs">
+                    <li className="breadcrumbs__item">
+                        <Link to="/main" className="breadcrumbs__name">Главная</Link>
                     </li>
-                    <li className="breadcrumbs__item"><a href="#" className="breadcrumbs__name">Аксессуары</a>
+                    <li className="breadcrumbs__item">
+                        <a href="#" className="breadcrumbs__name">Аксессуары</a>
                     </li>
-                    <li className="breadcrumbs__item"><a href="#" className="breadcrumbs__name">Головные уборы</a>
+                    <li className="breadcrumbs__item">
+                        <a href="#" className="breadcrumbs__name">Головные уборы</a>
                     </li>
-                </ul>
+                </ul> */}
                 <div className="card product-page__card">
                     <div className="card__top">
                         <Gallery prod={products[paramsId-1]} />

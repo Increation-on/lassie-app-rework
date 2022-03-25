@@ -489,3 +489,28 @@ img {
 .link:hover {
     color: green;
 }
+
+.autocomplete {
+    position: absolute;
+    height: 100%;
+    top: 50;
+    left: 0;
+    width: 100%;
+    z-index: 100;
+    font-size: 15px;
+    overflow: auto;
+    max-height: 240px;
+    height:auto;
+    background: white;
+    
+}
+
+.autocomplete__item {
+    padding: 5px;
+}
+
+.autocomplete__item:hover {
+    background: rgb(61, 154, 241);
+    cursor: pointer;
+    transition:cubic-bezier(1, 0, 0, 1) .3s all;
+}

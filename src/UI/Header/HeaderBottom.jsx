@@ -1,12 +1,17 @@
-import HDDM from "./HeaderDropdownMenu";
-import { useState, useEffect } from 'react';
+import HeaderDropdownMenu from "./HeaderDropdownMenu";
+import { useState, useEffect, useContext, createContext } from 'react';
+import { useDispatch, useSelector } from "react-redux";
 import axios from 'axios';
 import { Link } from "react-router-dom";
+import { getCatalogName } from "../../store/reducers/catalogReducer";
 
 
-const HeaderBottom = () => {
+const HeaderBottom = (props) => {
 
-    const [menu, setMenu] = useState([])
+    const [menu, setMenu] = useState([]);
+    const [navItem, setNavItem] = useState(null);
+
+    props.getNav(navItem);
 
     useEffect(() => {
         axios.get(`/mocks/hBN.json`).then(response => {
@@ -15,7 +20,6 @@ const HeaderBottom = () => {
         })
     }, []);
 
-    
     const buttonMenu = [...menu].reverse();
 
     
@@ -28,10 +32,10 @@ const HeaderBottom = () => {
                             return  <li key={el.id} className="menu__item">
                                         {el.sale?
                                             <a href="#" className="header__sale-wrapper menu__name">
-                                                <span className="header__sale">{el.title}</span></a>:
-                                            <Link to={el.path} className="menu__name">{el.title}</Link>
+                                                <span className="header__sale">{el.title}</span></a>
+                                            : <Link to={el.path} onMouseMove={()=> setNavItem(el.title)} className="menu__name">{el.title}</Link>
                                         }
-                                        <HDDM item = {el.item} menuId={el.id} />
+                                        <HeaderDropdownMenu item = {el.item} menuId={el.id} />
                                     </li>
                         })} 
                     </ul>

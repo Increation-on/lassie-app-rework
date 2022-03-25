@@ -7,7 +7,7 @@ const Logo = (props) => {
 
     return (
         <div className={`${styles.header__col} ${styles.header__col_logo}`}>
-            <NavLink to="/main" className={location==='/main'||location==='/'?styles.header__logo_dis:null}>
+            <NavLink to="/main" className={location==='/main' || location==='/'?styles.header__logo_dis:null}>
                 <img src={require('../../img/header/logo.png')} alt="logo" />
             </NavLink>
         </div>

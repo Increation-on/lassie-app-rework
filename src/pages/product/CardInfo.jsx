@@ -15,10 +15,6 @@ const CardInfo = (props) => {
     const [productPrice, setProductPrice] = useState(0);
     const [productSize, setProductSize] = useState(null);
 
-    const totalPrice = useSelector(state => state.totalPrice.totalPrice);
-    const totalAmount = useSelector(state => state.totalAmount.totalAmount);
-
-    
     
 
     const increment = () => {
@@ -35,13 +31,15 @@ const CardInfo = (props) => {
         }
     }
 
-    const setBasket = (price, amount, size, title=product.title, image=product.img, currentPrice = product.price, code=product.code, discount=product.discount) => {
+    
+
+    const setBasket = ( price, amount, size, title=product.title, image=product.img, currentPrice = product.price, code=product.code, discount=product.discount) => {
         dispatch(addSumTotalPriceAction(price));
         dispatch(addSumTotalAmountAction(amount));
         
 
         const prodInfo = {
-            price: cancelIdleCallback,
+            price: price,
             amount: amount,
             size: size,
             title: title,
@@ -120,7 +118,9 @@ const CardInfo = (props) => {
                                 <span onClick={decrement}  className="input-number__counter-spin input-number__counter-spin_less">Меньше</span>
                             </div>
                         </div>
-                        <div className="card__avaible text">Есть в наличии</div>
+                        {product.availability?<div className="card__avaible text">Есть в наличии</div>:<div style={{color:"red"}} className="card__avaible text">Под заказ</div>}
+                        
+                        
                     </div>
                 </div>
                 <button  

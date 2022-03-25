@@ -1,71 +1,90 @@
 import { useState } from "react";
 import { useDispatch } from "react-redux";
-import { addSumTotalAmountAction, addSumTotalPriceAction } from "../../../store/reducers/productInfoReducer";
+import { addSumTotalAmountAction, addSumTotalPriceAction, addProductInfoAction } from "../../../store/reducers/productInfoReducer";
 import { useParams, useLocation, Link } from "react-router-dom";
 
 
-const ProductCard = ({ price, name, img, url, sizes, mark, discount, id }) => {
+const ProductCard = ({ pPrice, name, img, url, sizes, pCode, mark, pDiscount, id }) => {
 
     const dispatch = useDispatch();
 
     const [count, setCount] = useState(0);
-    const [productPrice, setProductPrice] = useState(null);
+    const [productPrice, setProductPrice] = useState(0);
+    const [productSize, setProductSize] = useState(null);
+
 
     const increment = () => {
         setCount(count + 1);
-        discount ? setProductPrice(productPrice + discounted) : setProductPrice(productPrice + price);
+        pDiscount ? setProductPrice(productPrice + discounted) : setProductPrice(productPrice + pPrice);
     }
 
     const decrement = () => {
         setCount(count - 1);
-        setProductPrice(productPrice - price);
+        setProductPrice(productPrice - pPrice);
         if (count <= 0) {
             setCount(0);
             setProductPrice(null)
         }
     }
+    
 
-    const setBasket = (price, amount) => {
+    const setBasket = (price, amount, size, title=name, image=img, currentPrice = pPrice, code=pCode, discount=pDiscount, num=id) => {
         dispatch(addSumTotalPriceAction(price));
         dispatch(addSumTotalAmountAction(amount));
+        
+
+        const prodInfo = {
+            price: price,
+            amount: amount,
+            size: size,
+            title: title,
+            image: image,
+            currentPrice: currentPrice,
+            code: code,
+            discount: discount,
+            num: id
+        }
+        dispatch(addProductInfoAction(prodInfo));
+        
+        setProductSize(null);
         setCount(0);
         setProductPrice(null);
     }
 
     
     let discounted;
-    if(discount){
-          discounted = Math.trunc(price - (price * (discount/100)));
+    if(pDiscount){
+          discounted = Math.trunc(pPrice - (pPrice * (pDiscount/100)));
     }
    
 
     return (
-        <li className="goods__item">
+        <li key={id} className="goods__item">
             <article className="good">
                 <div className="good__content">
                     <Link to={`${url}/${id}`} className="good__link">
-                        <img src={img} alt="Товар" className="good__img" title="" />
+                        <img src={img} alt="Товар" className="good__img" title={name} />
                         {mark.map(el => {
                             return el.new ?
-                                <span key={el.id} className="flag flag_type_new">new</span> :
+                                <span key={id} className="flag flag_type_new">new</span> :
                                 el.hit ?
-                                    <span key={el.id} className="flag flag_type_hit">hit</span> :
+                                    <span key={id} className="flag flag_type_hit">hit</span> :
                                     el.sale ?
-                                        <span key={el.id} className="flag flag_type_sale">sale</span> :
+                                        <span key={id} className="flag flag_type_sale">sale</span> :
                                         null
                         })}
                     </Link>
                     <a href="#" className="like">Мне нравится</a>
                     <h4 className="good__name">{name}</h4>
                     <div className="good__price-wrapper">
-                        {discount?
+                        {pDiscount?
                                 <>
                                     <span  className="good__price good__price_new">{discounted} р.</span>
-                                    <span  className="good__price good__price_old">{price} р.</span>
-                                    <span  className="good__discount">Скидка {discount}%</span>
+                                    <span  className="good__price good__price_old">{pPrice} р.</span>
+                                    <span  className="good__discount">Скидка {pDiscount}%</span>
                                 </>   
                                  
-                                 : <span  className="good__price">{price} р.</span>
+                                 : <span key={id}  className="good__price">{pPrice} р.</span>
                         }   
                     </div>
                 </div>
@@ -76,9 +95,17 @@ const ProductCard = ({ price, name, img, url, sizes, mark, discount, id }) => {
                             {sizes.map(el => {
                                 return (
                                     <div key={el.id} className="checkbox-tile">
-                                        <input disabled={!el.available} id={`good1-size${el.id-1}`} name="Good[size]" type="radio" value={toString(el.num)} required className="checkbox-tile__elem" />
-                                        <label htmlFor={`good1-size${el.id-1}`} className="checkbox-tile__label">{el.num}</label>
+                                        <input
+                                            onClick={(e)=>setProductSize(e.target.value)} 
+                                            disabled={!el.available} 
+                                            id={`good${id-1}-size${el.id-1}`} 
+                                            name="Good[size]" type="radio" 
+                                            value={el.num} 
+                                            required 
+                                            className="checkbox-tile__elem" />
+                                        <label htmlFor={`good${id-1}-size${el.id-1}`} className="checkbox-tile__label">{el.num}</label>
                                     </div>
+                                    
                                 )
                             })}
                         </div>
@@ -92,7 +119,11 @@ const ProductCard = ({ price, name, img, url, sizes, mark, discount, id }) => {
                                 </div>
                             </div>
                         </div>
-                        <button onClick={() => setBasket(productPrice, count)} type="button" className="btn">Добавить в корзину</button>
+                        <button 
+                            onClick={() => setBasket(productPrice, count, productSize)} 
+                            type="button"
+                            disabled={!productPrice} 
+                            className="btn">Добавить в корзину</button>
                     </form>
                 </div>
             </article>

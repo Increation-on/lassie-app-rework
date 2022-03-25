@@ -13,6 +13,8 @@ const MainPagePopular = () => {
         dispatch(fetchProducts());  
     }, []);
 
+   
+
     return (
         <section className="popular">
             <div className="container">
@@ -24,13 +26,14 @@ const MainPagePopular = () => {
                         return <ProductCard 
                                         key={el.id}
                                         id={el.id} 
-                                        price={el.price} 
+                                        pPrice={el.price} 
                                         name={el.title} 
                                         img={el.img} 
                                         url={el.url} 
                                         sizes = {el.sizes} 
                                         mark={el.mark}
-                                        discount={el.discount}
+                                        pDiscount={el.discount}
+                                        pCode={el.code}
                                     />
                     })}
                 </ul>

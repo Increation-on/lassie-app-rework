@@ -16,7 +16,7 @@ const CatalogSort = () => {
                     <option value="popular">Популярности</option>
                     <option value="price">Цене</option>
                     <option value="new">Новизне</option>
-                    <option value="availibel">Наличию</option>
+                    <option value="available">Наличию</option>
                 </select>
             </div>
             <div className="catalog__sort-group"><span className="catalog__sort-text text">Отображать по:</span>

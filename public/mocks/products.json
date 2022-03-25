@@ -41,7 +41,15 @@
             ]},
             {"care": "Главное, не давайте носить ее вашему папе, а то она растянется и потеряет вид!"}
           
-        ]
+        ],
+        "season": "Зима",
+        "color": [
+            {"id": 1, "title": "Зеленый", "available": true, "name": "green"},
+            {"id": 2, "title": "Розовый", "available": true, "name": "pink"}
+        ],
+        "gender": "Мальчик",
+        "availability":true,
+        "collection": "Active"
     },
     
     { 
@@ -85,7 +93,15 @@
                 {"title":"Сочетается в варежками “Nyytti” и пинетками “Neuvo”", "id": 4}
             ]},
             {"care": "Главное, не давайте носить ее!"}
-        ]
+        ],
+        "season": "Межсезонные",
+        "color": [
+            {"id": 1, "title": "Зеленый", "available": true, "name": "green"},
+            {"id": 2, "title": "Розовый", "available": true, "name": "pink"}
+        ],
+        "gender": "Унисекс",
+        "availability":true,
+        "collection": "Active"
          
     },
 
@@ -130,7 +146,15 @@
                 {"title":"Сочетается в варежками “Nyytti” и пинетками “Neuvo”", "id": 4}
             ]},
             {"care": "Главное - не носить ее!"}
-        ] 
+        ],
+        "season": "Зима",
+        "color": [
+            {"id": 1, "title": "Зеленый", "available": true, "name": "green"},
+            {"id": 2, "title": "Розовый", "available": true, "name": "pink"}
+        ],
+        "gender": "Мальчик",
+        "availability":true,
+        "collection": "Active" 
     },
 
     { 
@@ -151,6 +175,7 @@
             {"new": false},
             {"sale": false}
         ],
+        "discount": null,   
         "images": [
             {"src": "/images/products/good-4.jpg", "id": 2},
             {"src": "/images/products/good-4.jpg", "id": 3},
@@ -173,7 +198,15 @@
                 {"title":"Сочетается в варежками “Nyytti” и пинетками “Neuvo”", "id": 4}
             ]},
             {"care": "Главное, не давайте eе!"}
-        ]  
+        ],
+        "season": "Межсезонные",
+        "color": [
+            {"id": 1, "title": "Зеленый", "available": true, "name": "green"},
+            {"id": 2, "title": "Розовый", "available": true, "name": "pink"}
+        ],
+        "gender": "Девочка",
+        "availability":true,
+        "collection": "Active"
     },
 
     { 
@@ -217,7 +250,15 @@
                 {"title":"Сочетается в варежками “Nyytti” и пинетками “Neuvo”", "id": 4}
             ]},
             {"care": "Главное, не давайте носить ее никому!"}
-        ]  
+        ],
+        "season": "Зима",
+        "color": [
+            {"id": 1, "title": "Зеленый", "available": true, "name": "green"},
+            {"id": 2, "title": "Розовый", "available": true, "name": "pink"}
+        ],
+        "gender": "Мальчик",
+        "availability":false,
+        "collection": "Active"  
     },
 
     { 
@@ -261,14 +302,21 @@
                 {"title":"Сочетается в варежками “Nyytti” и пинетками “Neuvo”", "id": 4}
             ]},
             {"care": "Главное!"}
-        ]
-    
-    
+        ],
+        "season": "Зима",
+        "color": [
+            {"id": 1, "title": "Зеленый", "available": true, "name": "green"},
+            {"id": 2, "title": "Розовый", "available": true, "name": "pink"}
+        ],
+        "gender": "Мальчик",
+        "availability":true,
+        "collection":"Active"
+
     },
-    
-    { 
-        "id": 7, 
-        "title": "Зимний комбинезон для новорожденных Grian", 
+
+    {
+        "id":7,
+        "title":"Зимний комбинезон для новорожденных Grian",
         "price": 3299, 
         "img":"/images/products/good-2.jpg", 
         "url":"/product",
@@ -307,7 +355,15 @@
                 {"title":"Сочетается в варежками “Nyytti” и пинетками “Neuvo”", "id": 4}
             ]},
             {"care": "Главное - не теряйте вид!"}
-        ] 
+        ],
+        "season": "Зима",
+        "color": [
+            {"id": 1, "title": "Зеленый", "available": true, "name": "green"},
+            {"id": 2, "title": "Розовый", "available": true, "name": "pink"}
+        ],
+        "gender": "Мальчик",
+        "availability":false,
+        "collection":"Active"
     },
 
     { 
@@ -351,7 +407,15 @@
                 {"title":"Сочетается в варежками “Nyytti” и пинетками “Neuvo”", "id": 4}
             ]},
             {"care": "О главном!"}
-        ] 
+        ],
+        "season": "Зима",
+        "color": [
+            {"id": 1, "title": "Зеленый", "available": true, "name": "green"},
+            {"id": 2, "title": "Розовый", "available": true, "name": "pink"}
+        ],
+        "gender": "Мальчик",
+        "availability":true,
+        "collection": "Active" 
     },
 
     { 
@@ -395,7 +459,15 @@
                 {"title":"Сочетается в варежками “Nyytti” и пинетками “Neuvo”", "id": 4}
             ]},
             {"care": "Вид потеряет она и растянется, не давайте папе вашему носить ее, главное!"}
-        ]  
+        ],
+        "season": "Зима",
+        "color": [
+            {"id": 1, "title": "Зеленый", "available": true, "name": "green"},
+            {"id": 2, "title": "Розовый", "available": true, "name": "pink"}
+        ],
+        "gender": "Мальчик",
+        "availability":true,
+        "collection": "Active"  
     },
 
     { 
@@ -439,6 +511,14 @@
                 {"title":"Сочетается в варежками “Nyytti” и пинетками “Neuvo”", "id": 4}
             ]},
             {"care": "Люк, я твой отец!"}
-        ]  
+        ],
+        "season": "Зима",
+        "color": [
+            {"id": 1, "title": "Зеленый", "available": true, "name": "green"},
+            {"id": 2, "title": "Розовый", "available": true, "name": "pink"}
+        ],
+        "gender": "Мальчик",
+        "availability":false,
+        "collection": "Active"  
     }
 ]
