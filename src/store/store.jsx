@@ -1,24 +1,30 @@
 import { createStore, combineReducers, applyMiddleware } from 'redux';
 import { composeWithDevTools } from '@redux-devtools/extension';
+import { persistStore, persistReducer } from 'redux-persist';
+import storage from 'redux-persist/lib/storage'
 import thunk from 'redux-thunk';
-import { productReducer } from './reducers/productReducer';
 import { productInfoReducer } from './reducers/productInfoReducer';
 import { sortReducer } from './reducers/sortReducer';
-import {filterReducer } from './reducers/filterReducer'
+import { filterReducer } from './reducers/filterReducer';
+import { catalogReducer } from './reducers/catalogReducer';
+import { orderReducer } from './reducers/orderReducer';
+
 
 const rootReducer = combineReducers({
-    collection: filterReducer,
-    season: filterReducer,
-    color: filterReducer,
-    size: filterReducer,
-    gender: filterReducer,
     productSortCategory: sortReducer,
     productDisplayNum: sortReducer,
-    products: productReducer,
+    unsortedProducts: sortReducer,
+    products: productInfoReducer,
     totalPrice: productInfoReducer,
     totalAmount: productInfoReducer,    
-    productInfo: productInfoReducer
-})
+    productInfo: productInfoReducer,
+    category: catalogReducer,
+    description: catalogReducer,
+    orderInfo: orderReducer,
+    filterItems: filterReducer,
+});
+
+
 
 
 export const store = createStore(rootReducer, composeWithDevTools(applyMiddleware(thunk)));

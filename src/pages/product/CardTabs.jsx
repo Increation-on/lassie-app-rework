@@ -8,13 +8,17 @@ const CardTabs = (props) => {
     return (
         <div className="card__tabs tabs">
             <ul className="tabs__nav">
-                <li data-tab='1' className="tabs__nav-item tabs__nav-item_active"><a href="#" className="tabs__nav-link">Описание</a>
+                <li  data-tab='1' className="tabs__nav-item tabs__nav-item_active">
+                    <a href="#" className="tabs__nav-link">Описание</a>
                 </li>
-                <li data-tab='2' className="tabs__nav-item"><a href="#" className="tabs__nav-link">Состав</a>
+                <li  data-tab='2' className="tabs__nav-item">
+                    <a href="#" className="tabs__nav-link">Состав</a>
                 </li>
-                <li data-tab='3' className="tabs__nav-item"><a href="#" className="tabs__nav-link">Уход</a>
+                <li data-tab='3' className="tabs__nav-item">
+                    <a href="#" className="tabs__nav-link">Уход</a>
                 </li>
-                <li data-tab='4' className="tabs__nav-item"><a href="#" className="tabs__nav-link">Отзывы <span className="card__reviews-num">74</span></a>
+                <li  data-tab='4' className="tabs__nav-item">
+                    <a href="#" className="tabs__nav-link">Отзывы <span className="card__reviews-num">74</span></a>
                 </li>
             </ul>
             <div className="tabs__content-wrapper">

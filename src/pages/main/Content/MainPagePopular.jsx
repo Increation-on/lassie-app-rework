@@ -10,7 +10,7 @@ const MainPagePopular = () => {
 
 
     useEffect(() => {
-        dispatch(fetchProducts());  
+        dispatch(fetchProducts());
     }, []);
 
    
@@ -25,15 +25,7 @@ const MainPagePopular = () => {
                     {products.map((el)=>{
                         return <ProductCard 
                                         key={el.id}
-                                        id={el.id} 
-                                        pPrice={el.price} 
-                                        name={el.title} 
-                                        img={el.img} 
-                                        url={el.url} 
-                                        sizes = {el.sizes} 
-                                        mark={el.mark}
-                                        pDiscount={el.discount}
-                                        pCode={el.code}
+                                        productData = {products[el.id-1]}
                                     />
                     })}
                 </ul>

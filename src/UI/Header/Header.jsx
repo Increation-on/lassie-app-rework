@@ -4,7 +4,7 @@ import HeaderTop from './HeaderTop';
 import HeaderMiddle from './HeaderMiddle';
 import HeaderBottom from './HeaderBottom';
 import Breadcrumbs from './Breadcrumbs';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 
 
@@ -20,6 +20,8 @@ const Header = (props) =>{
     }
 
     
+
+    
     const location = useLocation();
     const pathName = location.pathname;
 
@@ -32,7 +34,6 @@ const Header = (props) =>{
            {pathName !== "/main" && pathName !== "/"?
                 <Breadcrumbs item={navValue}/>
             :null}
-            {/* <Breadcrumbs item={navValue}/> */}
         </div>
     )
 }

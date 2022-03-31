@@ -1,11 +1,11 @@
 import axios from "axios";
-import { addProductsAction } from "../reducers/productReducer";
+import { getProductsAction } from "../reducers/productInfoReducer";
 
 export const fetchProducts = () => {
-    return (dispatch) => {
-        axios.get('/mocks/products.json').then((response) => {
+    return async (dispatch) => {
+        await axios.get('/mocks/products.json').then((response) => {
             const data = response.data;
-            dispatch(addProductsAction(data));
-        }).catch(err=> alert(err + ' - something went wrong'));
+            dispatch(getProductsAction(data));
+        }).catch(err => alert(err + ' - something went wrong'));
     }
 }

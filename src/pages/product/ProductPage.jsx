@@ -24,22 +24,11 @@ const ProductPage = () => {
     const params = useParams();
     const paramsId = Number(params.id);
    
-
+    console.log(products)
 
     return products? (
         <main className="content product-page">
             <div className="container">
-                {/* <ul className="breadcrumbs">
-                    <li className="breadcrumbs__item">
-                        <Link to="/main" className="breadcrumbs__name">Главная</Link>
-                    </li>
-                    <li className="breadcrumbs__item">
-                        <a href="#" className="breadcrumbs__name">Аксессуары</a>
-                    </li>
-                    <li className="breadcrumbs__item">
-                        <a href="#" className="breadcrumbs__name">Головные уборы</a>
-                    </li>
-                </ul> */}
                 <div className="card product-page__card">
                     <div className="card__top">
                         <Gallery prod={products[paramsId-1]} />
@@ -52,15 +41,8 @@ const ProductPage = () => {
                             {products.map((el) => {
                                 while (el.id <= 4) {
                                     return <ProductCard
-                                        key={el.id}
-                                        id={el.id}
-                                        price={el.price}
-                                        name={el.title}
-                                        img={el.img}
-                                        url={el.url}
-                                        sizes={el.sizes}
-                                        mark={el.mark}
-                                        discount={el.discount} />
+                                    key={el.id}
+                                    productData = {products[el-1]} />
                                         
                                 }
                             })}
@@ -73,14 +55,9 @@ const ProductPage = () => {
                                 while (el.id <= 4) {
                                     return <ProductCard
                                         key={el.id}
-                                        id={el.id}
-                                        price={el.price}
-                                        name={el.title}
-                                        img={el.img}
-                                        url={el.url}
-                                        sizes={el.sizes}
-                                        mark={el.mark}
-                                        discount={el.discount} />
+                                        productData = {products[el.id-1]}
+                                        
+                                        />
                                 }
                             })}
                         </ul>

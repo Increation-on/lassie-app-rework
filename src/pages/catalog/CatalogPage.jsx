@@ -14,24 +14,30 @@ const CatalogPage = () => {
     const sortCategory = useSelector(state => state.productSortCategory.productSortCategory);
     const catalogHead = useSelector(state=> state.category.category);
     const description = useSelector(state=> state.description.description);
+    const unsortedProducts = useSelector(state=> state.unsortedProducts.unsortedProducts);
+    const sortedProducts = useSelector(state=> state.sortedProducts.sortedProducts);
+
+    // const unsortedProducts = useSelector(state=> state.unsortedProducts.unsortedProducts);
+
+    useEffect(() => {
+        console.log("uns: ", unsortedProducts);
+        console.log(sortedProducts);
+    }, [sortedProducts]);
+    
+
     const dispatch = useDispatch();
     
 
-    useEffect(() => {
-        dispatch(fetchProducts());
-    }, []);
+    
 
     const sortByPrice = (arr) => {
         arr.sort((a, b)=> a.price > b.price ? 1 : -1);
     }
 
-    switch(sortCategory){
-        case "price":
-            sortByPrice(products);
-            break;
-        default: 
-           dispatch(fetchProducts());     
-    }
+
+    //in reducer!!!!!!!!!!!!
+
+    
 
     
 
@@ -39,13 +45,6 @@ const CatalogPage = () => {
         <main className="content catalog-page">
             
             <div className="container">
-                {/* <ul className="breadcrumbs">
-                    <li className="breadcrumbs__item">
-                        <Link to="/main" className="breadcrumbs__name">Главная</Link>
-                    </li>
-                    <li className="breadcrumbs__item"><a href="#" className="breadcrumbs__name">Аксессуары</a>
-                    </li>
-                </ul> */}
                 <h1>{catalogHead}</h1>
                 <p data-block='0' className="catalog-page__text">{description}</p>
                 <a href="#" data-btn='0' data-text="Скрыть текст" className="js-block-show link text">Читать далее</a>
@@ -60,15 +59,7 @@ const CatalogPage = () => {
                                     while(el.id <= goodsNumber){
                                         return <ProductCard 
                                         key={el.id}
-                                        id={el.id} 
-                                        pPrice={el.price} 
-                                        name={el.title} 
-                                        img={el.img} 
-                                        url={el.url} 
-                                        sizes = {el.sizes} 
-                                        mark={el.mark}
-                                        pDiscount={el.discount}
-                                        pCode={el.code} />
+                                        productData = {products[el.id-1]} />
                                     }       
                                 })}
                             </ul>

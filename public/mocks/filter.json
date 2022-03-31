@@ -14,10 +14,10 @@
         "type": "collection",
         "title": "Коллекция",
         "items": [
-            {"id": 1, "title": "Newborn", "available": false},
-            {"id": 2, "title": "Active", "available": true},
-            {"id": 3, "title": "Urban", "available": false},
-            {"id": 4, "title": "Lassie by Reina", "available": false}
+            {"id": 3, "title": "Newborn", "available": false},
+            {"id": 4, "title": "Active", "available": true},
+            {"id": 5, "title": "Urban", "available": false},
+            {"id": 6, "title": "Lassie by Reina", "available": false}
         ]
     },
 
@@ -26,16 +26,15 @@
         "title": "Цвет",
         "type": "color",
         "items": [
-            {"id": 1, "title": "Зеленый", "available": true, "name": "green"},
-            {"id": 2, "title": "Розовый", "available": true, "name": "pink"},
-            {"id": 3, "title": "Оранжевый", "available": true, "name": "orange"},
-            {"id": 4, "title": "Темно-синий", "available": true, "name": "dark-blue"},
-            {"id": 5, "title": "Салатовый", "available": true, "name": "light-green"},
-            {"id": 6, "title": "Песочный", "available": true, "name": "sand"},
-            {"id": 7, "title": "Темно-красный", "available": true, "name": "red"},
-            {"id": 8, "title": "Сиренеый", "available": true, "name": "lilac"},
-            {"id": 9, "title": "Голубой", "available": true, "name": "blue"}
-
+            {"id": 7, "title": "Зеленый", "available": true, "name": "green"},
+            {"id": 8, "title": "Розовый", "available": true, "name": "pink"},
+            {"id": 9, "title": "Оранжевый", "available": true, "name": "orange"},
+            {"id": 10, "title": "Темно-синий", "available": true, "name": "dark-blue"},
+            {"id": 11, "title": "Салатовый", "available": true, "name": "light-green"},
+            {"id": 12, "title": "Песочный", "available": true, "name": "sand"},
+            {"id": 13, "title": "Темно-красный", "available": true, "name": "red"},
+            {"id": 14, "title": "Сиренеый", "available": true, "name": "lilac"},
+            {"id": 15, "title": "Голубой", "available": true, "name": "blue"}
         ]
     },
 
@@ -44,9 +43,9 @@
         "title": "Пол",
         "type": "gender",
         "items": [
-            {"id": 1, "title": "Мальчик", "available": true},
-            {"id": 2, "title": "Девочка", "available": true},
-            {"id": 3, "title": "Унисекс", "available": true}
+            {"id": 16, "title": "Мальчик", "available": true},
+            {"id": 17, "title": "Девочка", "available": true},
+            {"id": 18, "title": "Унисекс", "available": true}
         ]
     },
 
@@ -55,18 +54,15 @@
         "title": "Размер",
         "type":"size",
         "items": [
-            {"id": 1, "title": 50, "available": true},
-            {"id": 2, "title": 56, "available": true},
-            {"id": 3, "title": 62, "available": true},
-            {"id": 4, "title": 68, "available": true},
-            {"id": 5, "title": 74, "available": true},
-            {"id": 6, "title": 80, "available": true},
-            {"id": 7, "title": 86, "available": true},
-            {"id": 8, "title": 92, "available": true},
-            {"id": 9, "title": 98, "available": true}
-
-            
-
+            {"id": 19, "title": 50, "available": true},
+            {"id": 20, "title": 56, "available": true},
+            {"id": 21, "title": 62, "available": true},
+            {"id": 22, "title": 68, "available": true},
+            {"id": 23, "title": 74, "available": true},
+            {"id": 24, "title": 80, "available": true},
+            {"id": 25, "title": 86, "available": true},
+            {"id": 26, "title": 92, "available": true},
+            {"id": 27, "title": 98, "available": true}
         ]
     },
 
@@ -75,10 +71,8 @@
         "title": "Наличие",
         "type": "availability",
         "items": [
-            {"id": 1, "title": "В наличии", "available": true},
-            {"id": 2, "title": "Под заказ", "available": true}
+            {"id": 28, "title": "В наличии", "available": true},
+            {"id": 29, "title": "Под заказ", "available": true}
         ]
     }
-    
-
 ]

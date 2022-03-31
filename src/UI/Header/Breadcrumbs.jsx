@@ -26,7 +26,7 @@ const Breadcrumbs = (props) => {
         { path:"/about", Component: About, id:5 },
         { path:"/delivery", Component: Delivery, id: 6 },
         { path:"/payment", Component: Payment, id: 7 },
-        { path:"/order", Component: OrderPage, id:8 },
+        { path:"/order", Component: OrderPage, breadcrumb:"Корзина", id:8 },
         { path:"/product/:id", Component: ProductPage, breadcrumb: catalogHead, id:9 },
         { path:"/product", Component: ProductPage, breadcrumb: props.item, id:10 },
         

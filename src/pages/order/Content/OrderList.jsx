@@ -1,11 +1,13 @@
 import { useSelector } from "react-redux";
 import { useNavigate } from 'react-router-dom';
+import { useEffect } from "react";
 
 
-const OrderList = () => {
+const OrderList = (props) => {
 
     const totalProductPrice = useSelector(state => state.totalPrice.totalPrice);
     const productInfo = useSelector(state => state.productInfo.productInfo);
+    const orderInfo = useSelector(state => state.orderInfo.orderInfo);
 
     const storageExist = localStorage.getItem("persist:root");
     
@@ -18,9 +20,11 @@ const OrderList = () => {
         
     }
 
+    console.log(orderInfo);
+    
     const nds = Math.trunc(totalProductPrice * 0.2);
 
-    console.log(productInfo)
+    
 
     return (
         <fieldset className="form__fieldset">
@@ -92,12 +96,16 @@ const OrderList = () => {
                      </p>
                  </div>
              </div>
-             <button type="submit" className="btn form__btn form__btn_align_right">Оформить заказ</button>
+             <button type="button" 
+                     onClick={()=>props.getOrderInfo(props.name, props.email, props.phone, props.city, props.street, props.postcode, props.house,
+                                    props.housing, props.apartment, props.dhl, props.dpd, props.mailing, props.cash, props.emoney)}
+                     className="btn form__btn form__btn_align_right">Оформить заказ</button>
              </>:null
             }
            
         </fieldset>
     )
 }
+
 
 export default OrderList;

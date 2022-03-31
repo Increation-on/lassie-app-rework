@@ -514,3 +514,9 @@ img {
     cursor: pointer;
     transition:cubic-bezier(1, 0, 0, 1) .3s all;
 }
+
+
+.autocomplete_hide {
+    display: none;
+    
+}

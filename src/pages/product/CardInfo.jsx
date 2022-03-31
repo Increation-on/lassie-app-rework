@@ -67,11 +67,11 @@ const CardInfo = (props) => {
             <header className="card__info-header">
                 {product.mark.map(el => {
                     return el.new ?
-                        <span key={el.id} className="flag flag_type_new">new</span> :
+                        <span key={product.id} className="flag flag_type_new">new</span> :
                         el.hit ?
-                            <span key={el.id} className="flag flag_type_hit">hit</span> :
+                            <span key={product.id} className="flag flag_type_hit">hit</span> :
                             el.sale ?
-                                <span key={el.id} className="flag flag_type_sale">sale</span> :
+                                <span key={product.id} className="flag flag_type_sale">sale</span> :
                                 null
                 })}
                 <h1 className="card__name">{product.title}</h1>
