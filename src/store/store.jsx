@@ -13,7 +13,8 @@ import { orderReducer } from './reducers/orderReducer';
 const rootReducer = combineReducers({
     productSortCategory: sortReducer,
     productDisplayNum: sortReducer,
-    unsortedProducts: sortReducer,
+    sortedByPriceProducts: sortReducer,
+    
     products: productInfoReducer,
     totalPrice: productInfoReducer,
     totalAmount: productInfoReducer,    

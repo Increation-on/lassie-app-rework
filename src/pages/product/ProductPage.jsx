@@ -19,31 +19,29 @@ const ProductPage = () => {
         dispatch(fetchProducts());
     }, []);
 
-    
+
 
     const params = useParams();
     const paramsId = Number(params.id);
-   
-    console.log(products)
 
-    return products? (
+    return products ? (
         <main className="content product-page">
             <div className="container">
                 <div className="card product-page__card">
                     <div className="card__top">
-                        <Gallery prod={products[paramsId-1]} />
-                        <CardInfo prod={products[paramsId-1]}/>
+                        <Gallery prod={products[paramsId - 1]} />
+                        <CardInfo prod={products[paramsId - 1]} />
                     </div>
-                    <CardTabs prod ={products[paramsId-1]} />
+                    <CardTabs prod={products[paramsId - 1]} />
                     <article className="product-page__section">
                         <h2 className="heading product-page__title"><span className="heading__text">С этим товаром покупают</span></h2>
                         <ul className="goods product-page__goods">
                             {products.map((el) => {
                                 while (el.id <= 4) {
                                     return <ProductCard
-                                    key={el.id}
-                                    productData = {products[el-1]} />
-                                        
+                                                key={el.id}
+                                                productData={products[el.id - 1]} 
+                                            />
                                 }
                             })}
                         </ul>
@@ -54,15 +52,14 @@ const ProductPage = () => {
                             {products.map((el) => {
                                 while (el.id <= 4) {
                                     return <ProductCard
-                                        key={el.id}
-                                        productData = {products[el.id-1]}
-                                        
-                                        />
+                                                key={el.id}
+                                                productData={products[el.id - 1]}
+                                            />
                                 }
                             })}
                         </ul>
                     </article>
-                    <Popup prod={products[paramsId-1]}/>
+                    <Popup prod={products[paramsId - 1]} />
                 </div>
             </div>
         </main>

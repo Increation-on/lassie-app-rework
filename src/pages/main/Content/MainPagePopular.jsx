@@ -24,9 +24,9 @@ const MainPagePopular = () => {
                 <ul className="goods">
                     {products.map((el)=>{
                         return <ProductCard 
-                                        key={el.id}
-                                        productData = {products[el.id-1]}
-                                    />
+                                    key={el.id}
+                                    productData = {products[el.id-1]}
+                                />
                     })}
                 </ul>
             </div>

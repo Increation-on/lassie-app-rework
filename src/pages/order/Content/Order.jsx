@@ -52,7 +52,7 @@ const Order = () => {
 
     // const handleData = async (e) => {
     //     e.preventDefault();
-    //     const response = await RequestService.login(
+    //     const response = await RequestService.postOrderData(
     //         name, email, phone, city, street, postcode, house, housing, apartment, dhl, dpd, mailing, cash, emoney);
     //     console.log(response);    
     // }
@@ -191,7 +191,7 @@ const Order = () => {
                     </div>
                 </fieldset>
                 <OrderList
-                    // postData = {handleData}
+                    // postData = {handlePostData}
                     getOrderInfo={getOrderInfo}
                     name={name}
                     email={email}

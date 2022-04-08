@@ -29,6 +29,7 @@ const ProductCard = (props) => {
     const [productPrice, setProductPrice] = useState(0);
     const [productSize, setProductSize] = useState(null);
 
+   
 
     const increment = () => {
         setCount(count + 1);
@@ -55,10 +56,10 @@ const ProductCard = (props) => {
         code=product.code, 
         discount=product.discount, 
         id=product.id) => {
+
         dispatch(addSumTotalPriceAction(price));
         dispatch(addSumTotalAmountAction(amount));
         
-
         const prodInfo = {
             price: price,
             amount: amount,
@@ -70,6 +71,7 @@ const ProductCard = (props) => {
             discount: discount,
             id: id
         }
+
         dispatch(addProductInfoAction(prodInfo));
         
         setProductSize(null);
@@ -77,12 +79,13 @@ const ProductCard = (props) => {
         setProductPrice(null);
     }
 
+
     
     let discounted;
     if(product.discount){
           discounted = Math.trunc(product.price - (product.price * (product.discount/100)));
     }
-   
+    
 
     return (
         <li className="goods__item">
@@ -107,9 +110,8 @@ const ProductCard = (props) => {
                                 <>
                                     <span  className="good__price good__price_new">{discounted} р.</span>
                                     <span  className="good__price good__price_old">{product.price} р.</span>
-                                    <span  className="good__discount">Скидка {product.price}%</span>
-                                </>   
-                                 
+                                    <span  className="good__discount">Скидка {product.discount}%</span>
+                                </>
                                  : <span  className="good__price">{product.price} р.</span>
                         }   
                     </div>
@@ -148,7 +150,8 @@ const ProductCard = (props) => {
                         <button 
                             onClick={() => setBasket(productPrice, count, productSize)} 
                             type="button"
-                            disabled={!productPrice} 
+                            disabled={!productPrice}
+                            style={!productPrice?{backgroundColor:"gray"}:{backgroundColor:"#0076bd"}} 
                             className="btn">Добавить в корзину</button>
                     </form>
                 </div>

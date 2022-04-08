@@ -5,7 +5,8 @@ import styles from './styles/Order.module.css';
 const OrderPage = () => {
     return (
         <main className={`${styles.content} ${styles.order_page}`}>
-            <Order/>        
+            {/* <Order/> */}
+            <OrderPageContent/>      
         </main>
     )
 }
