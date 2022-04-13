@@ -4,7 +4,7 @@ import Gallery from "./Gallery";
 import { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { fetchProducts } from "../../store/asyncActions/asyncProducts";
-import { Link, useParams } from "react-router-dom";
+import { Link, useParams, useLocation, useNavigate } from "react-router-dom";
 import ProductCard from "../main/Content/ProductCard";
 import Popup from "./Popup";
 
@@ -12,14 +12,13 @@ import Popup from "./Popup";
 const ProductPage = () => {
 
     const products = useSelector(state => state.products.products);
+    const currentPath = useSelector(state => state.location.location);
+    const sortedProducts = useSelector(state => state.sortedProducts.sortedProducts);
+    const displayFilteredProducts = useSelector(state => state.displayFilteredProducts.displayFilteredProducts);
+
+    const filteredProducts = useSelector(state => state.filteredProducts.filteredProducts);
+
     const dispatch = useDispatch();
-
-
-    useEffect(() => {
-        dispatch(fetchProducts());
-    }, []);
-
-
 
     const params = useParams();
     const paramsId = Number(params.id);
@@ -29,10 +28,20 @@ const ProductPage = () => {
             <div className="container">
                 <div className="card product-page__card">
                     <div className="card__top">
-                        <Gallery prod={products[paramsId - 1]} />
-                        <CardInfo prod={products[paramsId - 1]} />
+                        {currentPath.from === "/catalog" ? 
+                            <Gallery prod={displayFilteredProducts ? filteredProducts[paramsId-1] : sortedProducts[paramsId-1]} /> :
+                            <Gallery prod={products[paramsId - 1]} />
+                        }
+                        {currentPath.from === "/catalog" ? 
+                            <CardInfo prod={displayFilteredProducts ? filteredProducts[paramsId-1] : sortedProducts[paramsId-1]} /> :
+                            <CardInfo prod={products[paramsId - 1]} />
+                        }
+
                     </div>
-                    <CardTabs prod={products[paramsId - 1]} />
+                        {currentPath.from === "/catalog" ?  
+                            <CardTabs prod={displayFilteredProducts ? filteredProducts[paramsId-1] : sortedProducts[paramsId-1]} /> :
+                            <CardTabs prod={products[paramsId - 1]} />
+                        }
                     <article className="product-page__section">
                         <h2 className="heading product-page__title"><span className="heading__text">С этим товаром покупают</span></h2>
                         <ul className="goods product-page__goods">

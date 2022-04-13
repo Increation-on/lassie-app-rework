@@ -3,57 +3,59 @@ import { useEffect } from "react";
 const CardTabs = (props) => {
 
     const product = props.prod;
-
+    let key = 1;
 
     return (
         <div className="card__tabs tabs">
             <ul className="tabs__nav">
-                <li  data-tab='1' className="tabs__nav-item tabs__nav-item_active">
+                <li data-tab='1' className="tabs__nav-item tabs__nav-item_active">
                     <a href="#" className="tabs__nav-link">Описание</a>
                 </li>
-                <li  data-tab='2' className="tabs__nav-item">
+                <li data-tab='2' className="tabs__nav-item">
                     <a href="#" className="tabs__nav-link">Состав</a>
                 </li>
                 <li data-tab='3' className="tabs__nav-item">
                     <a href="#" className="tabs__nav-link">Уход</a>
                 </li>
-                <li  data-tab='4' className="tabs__nav-item">
+                <li data-tab='4' className="tabs__nav-item">
                     <a href="#" className="tabs__nav-link">Отзывы <span className="card__reviews-num">74</span></a>
                 </li>
             </ul>
             <div className="tabs__content-wrapper">
-                <div data-tab='1' className="tabs__content tabs__content_active">
-                    {product && product.description ?
-                        product.description.map(el => {
-                            return (
-                                    <div className="card__content-block">
+                {product ?
+                    <div key={key++} data-tab='1' className="tabs__content tabs__content_active">
+                        {product && product.description ?
+                            product.description.map(el => {
+                                return (
+                                    <div key={key++} className="card__content-block">
                                         <p className="text">{el.main}</p>
                                     </div>
-                            )
-                        }) : null
-                    }
-                     <ul className="list list_markers">
-                        {product && product.description?
-                            product.description[1].thesis.map(el=>{
-                                return <li className="list__item list__item_marker_orange text">{el.title}</li> 
+                                )
+                            }) : null
+                        }
+                        <ul className="list list_markers">
+                            {product && product.description ?
+                                product.description[1].thesis.map(el => {
+                                    return <li key={el.id} className="list__item list__item_marker_orange text">{el.title}</li>
+                                }) : null
+                            }
+                        </ul>
+                    </div> : null
+                }
+                <div data-tab='2' className="tabs__content">
+                    <ul className="list list_markers">
+                        {product ?
+                            product.material.map(el => {
+                                return <li key={el.id} className="list__item list__item_marker_orange text">{el.title}</li>
                             }) : null
                         }
                     </ul>
                 </div>
-                <div data-tab='2' className="tabs__content">
-                    <ul className="list list_markers">
-                        {product?
-                             product.material.map(el=>{
-                                return  <li className="list__item list__item_marker_orange text">{el.title}</li>
-                            }): null    
-                    }
-                    </ul>
-                </div>
                 <div data-tab='3' className="tabs__content">
-                {product?
-                             product.description.map(el=>{
-                                return   <p className="text">{el.care}</p>
-                            }): null    
+                    {product ?
+                        product.description.map(el => {
+                            return <p key={key++} className="text">{el.care}</p>
+                        }) : null
                     }
                 </div>
                 <div data-tab='4' className="tabs__content">

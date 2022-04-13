@@ -1,5 +1,11 @@
 import axios from "axios";
-import { getSortByPriceProductsAction, getSortByPopularProductsAction, getSortByNewProductsAction, getSortByAvailableProductsAction } from "../reducers/sortReducer";
+import {
+            getUnsortedProductsAction,  
+            getSortByPriceProductsAction, 
+            getSortByPopularProductsAction,
+            getSortByNewProductsAction, 
+            getSortByAvailableProductsAction 
+        } from "../reducers/sortReducer";
 
 export const fetchSortedByPriceProducts = () => {
     return async  (dispatch) => {
@@ -34,5 +40,14 @@ export const fetchSortedByAvailableProducts = () => {
             const data = response.data;
             dispatch(getSortByAvailableProductsAction(data));
         }).catch(err => alert(err + ' - something went wrong'));
+    }
+}
+
+export const fetchUnsortedProducts = () => {
+    return async (dispatch) => {
+        await axios.get('/mocks/products.json').then((response) => {
+            const data = response.data;
+            dispatch(getUnsortedProductsAction(data))
+        }).catch(err => alert(err + ` - something went wrong`));
     }
 }

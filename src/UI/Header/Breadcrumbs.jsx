@@ -3,6 +3,7 @@ import { Link, useParams, useLocation } from "react-router-dom";
 import useBreadcrumbs from 'use-react-router-breadcrumbs';
 import { router } from "../../router/routes";
 import { useSelector } from "react-redux";
+import styles from '../styles/Header.module.css';
 
 import MainPage from '../../pages/main/MainPage';
 import ErrorPage from '../../pages/error/ErrorPage';
@@ -34,12 +35,12 @@ const Breadcrumbs = (props) => {
 
     const breadcrumbs = useBreadcrumbs(routes);
     
-
     return (
         <ul style={{ marginTop: "20px", marginLeft: "20px" }} className="breadcrumbs">
-            {breadcrumbs.map(({match,breadcrumb}) => {
-                return   <li key = {match.pathname} className="breadcrumbs__item">
-                            <Link to={match.pathname} className="breadcrumbs__name">{breadcrumb}</Link>
+            {breadcrumbs.map(({match,breadcrumb}, index) => {
+                return   <li key = {match.pathname} className={index===breadcrumbs.length-1?styles.breadcrumbs__item_last:"breadcrumbs__item"}>
+                            <Link  to={match.pathname} 
+                            className={index===breadcrumbs.length-1?styles.last__breadcrumb_dis:"breadcrumbs__name"}>{breadcrumb}</Link>
                         </li>        
             })}
         </ul>

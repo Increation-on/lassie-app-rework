@@ -124,8 +124,9 @@ const CardInfo = (props) => {
                     </div>
                 </div>
                 <button  
-                        onClick={() => setBasket(productPrice, count, productSize)}
-                        disabled={!productSize}
+                        onClick={() => setBasket(productPrice, count, productSize)} 
+                        disabled={!count || !productSize}
+                        style={!count || !productSize?{backgroundColor:"gray"}:{backgroundColor:"#0076bd"}}
                         type="button" 
                         data-popup="good" 
                         className="btn form__btn js-popup-open">

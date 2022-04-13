@@ -17,22 +17,31 @@ const persistConfig = {
 
 
 const rootReducer = combineReducers({
+
     productSortCategory: sortReducer,
     productDisplayNum: sortReducer,
     sortedByPriceProducts: sortReducer,
     sortedByPopularProducts: sortReducer,
     sortedByNewProducts: sortReducer,
     sortedByAvailableProducts: sortReducer,
+    sortedProducts: sortReducer,
+    
 
     products: productInfoReducer,
     totalPrice: productInfoReducer,
     totalAmount: productInfoReducer,    
     productInfo: productInfoReducer,
+    location: productInfoReducer,
+
     category: catalogReducer,
     description: catalogReducer,
+
     orderInfo: orderReducer,
+
     filterItems: filterReducer,
     filterInfo: filterReducer,
+    filteredProducts: filterReducer,
+    displayFilteredProducts: filterReducer
 });
 
 const persistedReducer  = persistReducer(persistConfig, rootReducer)

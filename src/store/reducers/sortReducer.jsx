@@ -6,6 +6,8 @@ const initialState = {
     sortedByPopularProducts: [],
     sortedByNewProducts: [],
     sortedByAvailableProducts: [],
+    unsortedProducts: [],
+    sortedProducts: [],
 
 }
 
@@ -13,6 +15,8 @@ const CHANGE_DISPLAY_NUM = "CHANGE_DISPLAY_NUM";
 const SHOW_ALL_GOODS = "SHOW_ALL_GOODS";
 const SHOW_MORE_GOODS = "SHOW_MORE_GOODS";
 const CHANGE_SORT_CATEGORY = "CHANGE_SORT_CATEGORY";
+const GET_PRODUCTS = "GET_PRODUCTS";
+const SORT_PRODUCTS = "SORT_PRODUCTS";
 
 
 const GET_SORT_BY_PRICE = "GET_SORT_BY_PRICE_PRODUCTS";
@@ -38,10 +42,26 @@ export const sortReducer = (state = initialState, action) => {
         case GET_SORT_BY_NEW:
             return {...state, sortedByNewProducts: [...action.payload] }
         case GET_SORT_BY_AVAILABLE:
-            return {...state, sortedByAvailableProducts: [...action.payload] }             
+            return {...state, sortedByAvailableProducts: [...action.payload] }
+        case GET_PRODUCTS:
+            return {...state, unsortedProducts: [...action.payload] }    
+        case SORT_PRODUCTS: 
+            switch(action.payload){
+                case "price":
+                    return {...state, sortedProducts: [...state.sortedByPriceProducts] }
+                case "popular":
+                    return {...state, sortedProducts: [...state.sortedByPopularProducts] }
+                case "new":
+                    return {...state, sortedProducts: [...state.sortedByNewProducts] }
+                case "available":
+                    return {...state, sortedProducts: [...state.sortedByAvailableProducts] }
+                default: 
+                    return {...state, sortedProducts: [...state.unsortedProducts]}           
+            }        
         default:
             return state
     }
+    
 }
 
 
@@ -74,4 +94,12 @@ export const getSortByNewProductsAction = (payload) => {
 
 export const getSortByAvailableProductsAction = (payload) => {
     return { type: GET_SORT_BY_AVAILABLE, payload }
+}
+
+export const sortProductsAction = (payload) => {
+    return {type: SORT_PRODUCTS  , payload }
+}
+
+export const getUnsortedProductsAction = (payload) => {
+    return {type: GET_PRODUCTS , payload }
 }

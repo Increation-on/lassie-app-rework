@@ -15,6 +15,7 @@ const HeaderDropdownMenu = (props) => {
     const getInfo = (name, description) => {
         dispatch(getCatalogName(name));
         dispatch(getProductDescription(description));
+        props.setHeadBotMenuItem(props.navItem);
     }
 
 

@@ -28,5 +28,24 @@ export default class RequestService {
         console.log(e)
     }
     
+  }
+
+  static async postFilterData(filterData) {
+    try {
+        const response = await axios.post(url, {
+          season: filterData.season,
+          collection: filterData.collection, 
+          gender: filterData.gender,
+          size: filterData.size,
+          available:  filterData.available, 
+          color: filterData.color,
+          minPrice: filterData.minPrice,
+          maxPrice: filterData.maxPrice
+        })
+        return response 
+    }catch(e) {
+        console.log(e)
+    }
+    
   };
 }

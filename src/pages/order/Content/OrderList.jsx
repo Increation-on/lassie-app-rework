@@ -7,7 +7,6 @@ const OrderList = (props) => {
 
     const totalProductPrice = useSelector(state => state.totalPrice.totalPrice);
     const productInfo = useSelector(state => state.productInfo.productInfo);
-    const orderInfo = useSelector(state => state.orderInfo.orderInfo);
 
     const storageExist = localStorage.getItem("persist:root");
     
@@ -20,7 +19,11 @@ const OrderList = (props) => {
         
     }
 
-    // console.log(orderInfo);
+    let key = 1;
+
+    useEffect(() => {
+        console.log("prInfo: ", productInfo);
+    },[])
 
   
     
@@ -48,8 +51,8 @@ const OrderList = (props) => {
                 </div>
                 {storageExist?
                      <div className="goods-table__main">
-                     {productInfo.map(el => {
-                         return <div key={el.num} className="goods-table__row">
+                     {productInfo.map((el, index) => {
+                         return <div key={key++} className="goods-table__row">
                              <div className="goods-table__cell">
                                  <div className="goods-table__col">
                                      <div className="goods-table__img-wrapper">

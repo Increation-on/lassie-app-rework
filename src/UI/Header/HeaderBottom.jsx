@@ -9,9 +9,15 @@ import { getCatalogName } from "../../store/reducers/catalogReducer";
 const HeaderBottom = (props) => {
 
     const [menu, setMenu] = useState([]);
+
     const [navItem, setNavItem] = useState(null);
 
-    props.getNav(navItem);
+    const [bottomMenuItem, setBottomMenuItem] = useState(null);
+
+    useEffect( () => {
+        props.getNav(bottomMenuItem);
+    }, [bottomMenuItem])
+
 
     useEffect(() => {
         axios.get(`/mocks/hBN.json`).then(response => {
@@ -33,13 +39,14 @@ const HeaderBottom = (props) => {
                                         {el.sale?
                                             <a href="#" className="header__sale-wrapper menu__name">
                                                 <span className="header__sale">{el.title}</span></a>
-                                            : <Link to={el.path} onMouseMove={()=> setNavItem(el.title)} className="menu__name">{el.title}</Link>
+                                            : <Link to={el.path} onClick={()=>setBottomMenuItem(el.title)} onMouseMove={()=>setNavItem(el.title)} className="menu__name">{el.title}</Link>
                                         }
-                                        <HeaderDropdownMenu item = {el.item} menuId={el.id} />
+                                        <HeaderDropdownMenu navItem={navItem} setHeadBotMenuItem={setBottomMenuItem}  item = {el.item} menuId={el.id} />
                                     </li>
                         })} 
                     </ul>
-                    <button className="burger-btn header__nav-btn js-nav-btn"><span className="burger-btn__switch">Развернуть меню </span>
+                    <button className="burger-btn header__nav-btn js-nav-btn">
+                        <span className="burger-btn__switch">Развернуть меню </span>
                     </button>
                     <div className="navigation__collapse">
                         <ul className="navigation__collapse-menu vertical-menu">

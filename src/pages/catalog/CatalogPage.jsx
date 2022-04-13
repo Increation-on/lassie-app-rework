@@ -5,10 +5,12 @@ import ProductCard from "../main/Content/ProductCard";
 import CatalogSort from "./CatalogSort";
 import Filter from "./Filter";
 import FilterTest from "./FilterTest";
-import { fetchFilter } from "../../store/asyncActions/asyncFilter";
-import { showAllGoodsAction, showMoreGoodsAction } from "../../store/reducers/sortReducer";
+import { fetchFilter, fetchFilteredProducts } from "../../store/asyncActions/asyncFilter";
+import { showAllGoodsAction, showMoreGoodsAction, sortProductsAction } from "../../store/reducers/sortReducer";
 import { Link, useLocation } from 'react-router-dom';
-import { fetchSortedByPriceProducts, fetchSortedByPopularProducts, fetchSortedByNewProducts, fetchSortedByAvailableProducts } from './../../store/asyncActions/asyncSorting';
+import { fetchUnsortedProducts, fetchSortedByPriceProducts, fetchSortedByPopularProducts, fetchSortedByNewProducts, fetchSortedByAvailableProducts } from './../../store/asyncActions/asyncSorting';
+import RequestService from './../../api/RequestService';
+import { displayFilteredProductsAction } from './../../store/reducers/filterReducer';
 
 const CatalogPage = () => {
 
@@ -18,17 +20,13 @@ const CatalogPage = () => {
     const catalogHead = useSelector(state => state.category.category);
     const description = useSelector(state => state.description.description);
     const filterItems = useSelector(state => state.filterItems.filterItems);
-
-    // useEffect(() => {
-    //     dispatch(fetchFilter());
-    // }, [])
+    const displayFilteredProducts = useSelector(state => state.displayFilteredProducts.displayFilteredProducts)
 
     const dispatch = useDispatch();
 
-    const sortedByPrice = useSelector(state => state.sortedByPriceProducts.sortedByPriceProducts);
-    const sortedByPopular = useSelector(state => state.sortedByPopularProducts.sortedByPopularProducts);
-    const sortedByNew = useSelector(state => state.sortedByNewProducts.sortedByNewProducts);
-    const sortedByAvailability = useSelector(state => state.sortedByAvailableProducts.sortedByAvailableProducts);
+    const sortedProducts = useSelector(state => state.sortedProducts.sortedProducts);
+
+    const filteredProducts = useSelector(state => state.filteredProducts.filteredProducts);
 
     const [seasonValue, setSeasonValue] = useState([]);
     const [collectionValue, setCollectionValue] = useState([]);
@@ -39,22 +37,8 @@ const CatalogPage = () => {
     const [minPrice, setMinPrice] = useState('');
     const [maxPrice, setMaxPrice] = useState('');
 
-
     const [generalFilter, setGeneralFilter] = useState({});
     
-    // let convertValueToObject = (arr) => {
-    //     let newObj={};
-    //     let objArr=[];
-    //     if(arr.length === 2){
-    //         newObj[arr[0]] = arr[1];
-    //     } else {
-    //         for(let i = 1; i<arr.length; i++){
-    //             objArr.push(arr[i])
-    //         }
-    //         newObj[arr[0]] = objArr;
-    //     }
-    //     return newObj;
-    // }
 
     let convertValue = (arr) => {
         let objArr=[];
@@ -69,9 +53,9 @@ const CatalogPage = () => {
         }
     }
 
-    
+    const [checked, setChecked ] = useState(false);
 
-    const getFilterValue = (val) => {
+    const getFilterValue = (val, check) => { ///////////////////cheked from checkboxes of FilterTest !!! if !check => disabled ={true}
         switch(val[0]) {
             case "season":
                 setSeasonValue(convertValue(val))
@@ -94,8 +78,10 @@ const CatalogPage = () => {
             default:
                 return                        
         }
-       
+        setChecked(check)
     }
+
+    
 
     useEffect(() => {
         dispatch(fetchFilter());
@@ -103,7 +89,17 @@ const CatalogPage = () => {
         dispatch(fetchSortedByPopularProducts());
         dispatch(fetchSortedByNewProducts());
         dispatch(fetchSortedByAvailableProducts());
+        dispatch(fetchUnsortedProducts());
+        dispatch(fetchFilteredProducts());
     }, []);
+
+    const [renderFilteredData, setRenderFilteredData] = useState(false);
+
+    useEffect(() => {
+        dispatch(displayFilteredProductsAction(renderFilteredData));
+    },[renderFilteredData]);
+
+   
 
 
     useEffect(() => {
@@ -119,14 +115,32 @@ const CatalogPage = () => {
         });
     }, [seasonValue, collectionValue, genderValue, sizeValue, availableValue, colorValue, minPrice, maxPrice]);
 
+
+
+    useEffect(() => {
+        dispatch(sortProductsAction(sortCategory));
+    }, [sortCategory]);
+
+
     // useEffect(() => {
-    //     console.log(generalFilter)
-    // }, [generalFilter]);
+    //     console.log("store: ", displayFilteredProducts);
+    //     // console.log("state: ", renderFilteredData);
+    // },[displayFilteredProducts, sortCategory]);
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        console.log(JSON.stringify(generalFilter))
+        alert(JSON.stringify(generalFilter))
     }
+
+    // const onFormSubmit = async (e) => {
+    //     e.preventDefault();
+    //     console.log(generalFilter)
+    //     const response = await RequestService.postFilterData(generalFilter);
+    //     const data = await response.json();
+    //     console.log(data);
+    //     setFilteredData(data);
+    //   };
+
 
     return (
         <main className="content catalog-page">
@@ -152,32 +166,39 @@ const CatalogPage = () => {
                                 </div>
                             </div>
                         </div>
-                        <button type="submit" className="btn">Показать товары</button>
+                        <button disabled={!minPrice && !maxPrice && !checked }
+                                style={!minPrice && !maxPrice && !checked ? {backgroundColor:"gray"} : {backgroundColor:"#0076bd"}} 
+                                onClick={()=>dispatch(displayFilteredProductsAction(true))}  
+                                type="submit" className="btn">Показать товары</button>
                         </fieldset>
                     </form>
                     {/* <Filter filterItems = {filterItems}/> */}
                     <div className="catalog__main">
-                        <CatalogSort />
+                        <CatalogSort/>
                         <div className="catalog__goods-wrapper">
                             <ul className="goods">
-                                {products.map((el) => {
-                                    while (el.id <= goodsNumber) {
-                                        return <ProductCard
-                                            key={el.id}
-                                            productData={
-                                                sortCategory === "price" ?
-                                                    sortedByPrice[el.id - 1] :
-                                                    sortCategory === "popular" ?
-                                                        sortedByPopular[el.id - 1] :
-                                                        sortCategory === "new" ?
-                                                            sortedByNew[el.id - 1] :
-                                                            sortCategory === "available" ?
-                                                                sortedByAvailability[el.id - 1] :
-                                                                products[el.id - 1]
-                                            }
-                                        />
+                                {displayFilteredProducts ? 
+                                    filteredProducts.map((el) => {
+                                        while (el.id <= goodsNumber) {
+                                            return <ProductCard
+                                                key={el.id}
+                                                productData={filteredProducts[el.id-1]}
+                                            />
+                                        }
+                                    })
+                                : 
+                                sortCategory ?
+                                sortedProducts.map(el=>{
+                                    while(el.id <= goodsNumber){
+                                        return <ProductCard key={el.id} productData={sortedProducts[el.id -1]}/>
                                     }
-                                })}
+                                }):
+                                products.map(el=>{
+                                        while(el.id <= goodsNumber){
+                                            return <ProductCard key={el.id} productData={products[el.id-1]}/>
+                                        }
+                                    })         
+                                }
                             </ul>
                         </div>
                         <div className="catalog__more">

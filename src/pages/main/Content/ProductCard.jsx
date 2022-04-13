@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { addSumTotalAmountAction, addSumTotalPriceAction, addProductInfoAction } from "../../../store/reducers/productInfoReducer";
 import { useParams, useLocation, Link } from "react-router-dom";
@@ -6,23 +6,7 @@ import { useParams, useLocation, Link } from "react-router-dom";
 
 const ProductCard = (props) => {
 
-    const product = props.productData;
-
-
-    // key={el.id}
-    // id={el.id} 
-    // pPrice={el.price} 
-    // name={el.title} 
-    // img={el.img} 
-    // url={el.url} 
-    // sizes = {el.sizes} 
-    // mark={el.mark}
-    // pDiscount={el.discount}
-    // pCode={el.code}
-
-   
-
-    
+    const product = props.productData;    
     const dispatch = useDispatch();
 
     const [count, setCount] = useState(0);
@@ -39,13 +23,13 @@ const ProductCard = (props) => {
     const decrement = () => {
         setCount(count - 1);
         setProductPrice(productPrice - product.price);
-        if (count <= 0) {
+        if (count === 0) {
             setCount(0);
             setProductPrice(null)
         }
     }
-    
 
+    
     const setBasket = (
         price, 
         amount, 
@@ -150,9 +134,9 @@ const ProductCard = (props) => {
                         <button 
                             onClick={() => setBasket(productPrice, count, productSize)} 
                             type="button"
-                            disabled={!productPrice}
-                            style={!productPrice?{backgroundColor:"gray"}:{backgroundColor:"#0076bd"}} 
-                            className="btn">Добавить в корзину</button>
+                            disabled={!count || !productSize}
+                            style={!count || !productSize?{backgroundColor:"gray"}:{backgroundColor:"#0076bd"}} 
+                            className="btn">{!productSize?"Выберите размер":"Добавить в корзину"}</button>
                     </form>
                 </div>
             </article>

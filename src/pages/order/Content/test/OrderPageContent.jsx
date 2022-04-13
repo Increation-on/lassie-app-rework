@@ -26,9 +26,8 @@ const OrderPageContent = () => {
 
     const [toggleErr, setToggleErr] = useState(true);
 
-
     const onFormSubmit = (data) => {
-        console.log(JSON.stringify(data));
+        alert(JSON.stringify(data));
         reset();
     }
 
@@ -42,10 +41,11 @@ const OrderPageContent = () => {
                 <fieldset className="form__fieldset">
                     <legend className="form__title">Информация о покупателе</legend>
                     <CustomerInfo
-                        register={register}
+                        register={register} 
                         errors={errors}
                         dirtyFields={dirtyFields}
                         isValid={isValid}
+                        patternValue={/^([а-яё\s]+|[a-z\s]+)$/iu}
                         labelClass="form__col form__col_width_220"
                         formClass="form__col form__col_width_375"
                         htmlForName='order_name'
@@ -201,14 +201,6 @@ const OrderPageContent = () => {
 
                 <fieldset className="form__fieldset">
                     <legend className="form__title">Способ оплаты</legend>
-                    {/* <div className="radio">
-                        <input id="order-payment-1" name="Order[payment]" type="radio" value="cash" required className="radio__elem"/>
-                            <label htmlFor="order-payment-1" className="form__label radio__label">Наличными курьеру</label>
-                    </div>
-                    <div className="radio">
-                        <input id="order-payment-2" name="Order[payment]" type="radio" value="e-money" required className="radio__elem"/>
-                            <label htmlFor="order-payment-2" className="form__label radio__label">Электронные платежи</label>
-                    </div> */}
                     <PaymentMethod
                         register={register}
                         errors={errors}

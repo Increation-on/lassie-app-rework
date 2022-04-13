@@ -2,18 +2,23 @@ import { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { changeDisplayNumAction, changeSortCategoryAction } from "../../store/reducers/sortReducer";
 import { getSortByPriceProductsAction } from "../../store/asyncActions/asyncSorting";
+import { displayFilteredProductsAction } from "../../store/reducers/filterReducer";
 
-const CatalogSort = () => {
+const CatalogSort = (props) => {
 
     const displayNum = useSelector(state => state.productDisplayNum.productDisplayNum);
-    const products = useSelector(state => state.products.products);
     const productSortCategory = useSelector(state => state.productSortCategory.productSortCategory)
     const dispatch = useDispatch();
+
+    const handleChange = (value) => {
+        dispatch(changeSortCategoryAction(value));
+        dispatch(displayFilteredProductsAction(false));
+    }
 
     return  (
         <div className="catalog__sort">
             <div className="catalog__sort-group"><span className="catalog__sort-text text">Сортировать по:</span>
-                <select value={productSortCategory} onChange={(e)=>dispatch(changeSortCategoryAction(e.target.value))} name="sort" className="js-select select">
+                <select value={productSortCategory} onChange={(e)=>handleChange(e.target.value)} name="sort" className="js-select select">
                     <option value="popular">Популярности</option>
                     <option value="price">Цене</option>
                     <option value="new">Новизне</option>

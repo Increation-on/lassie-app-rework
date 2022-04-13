@@ -12,7 +12,8 @@ const FilterTest = (props) => {
     const filterItems = props.filterItems;
     
     const [filterValue, setFilterValue] = useState([filterItems.type]);
-
+    
+    const [checked, setChecked] = useState()
     
     // dispatch(addFilterInfoAction())
 
@@ -23,10 +24,11 @@ const FilterTest = (props) => {
        } else {
         setFilterValue(prev => prev.filter(el => el !== value));
        }
+       setChecked(checked);
     }
 
     useEffect(() => {
-        props.getFilterValue(filterValue);
+        props.getFilterValue(filterValue, checked);
     }, [filterValue]);
    
     return (
