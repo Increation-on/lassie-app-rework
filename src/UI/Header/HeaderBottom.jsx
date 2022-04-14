@@ -14,6 +14,8 @@ const HeaderBottom = (props) => {
 
     const [bottomMenuItem, setBottomMenuItem] = useState(null);
 
+    const [displayDropdown, setDisplayDropdown] = useState(false);
+
     useEffect( () => {
         props.getNav(bottomMenuItem);
     }, [bottomMenuItem])
@@ -41,7 +43,14 @@ const HeaderBottom = (props) => {
                                                 <span className="header__sale">{el.title}</span></a>
                                             : <Link to={el.path} onClick={()=>setBottomMenuItem(el.title)} onMouseMove={()=>setNavItem(el.title)} className="menu__name">{el.title}</Link>
                                         }
-                                        <HeaderDropdownMenu style={{display:"none"}} navItem={navItem} setHeadBotMenuItem={setBottomMenuItem}  item = {el.item} menuId={el.id} />
+                                        <HeaderDropdownMenu  
+                                            display={displayDropdown}
+                                            setDisplay={setDisplayDropdown} 
+                                            navItem={navItem} 
+                                            setHeadBotMenuItem={setBottomMenuItem}  
+                                            item = {el.item} 
+                                            menuId={el.id} 
+                                        />
                                     </li>
                         })} 
                     </ul>

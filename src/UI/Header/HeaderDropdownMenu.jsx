@@ -16,11 +16,15 @@ const HeaderDropdownMenu = (props) => {
         dispatch(getCatalogName(name));
         dispatch(getProductDescription(description));
         props.setHeadBotMenuItem(props.navItem);
+        props.setDisplay(true);
+        setTimeout(() =>{
+            props.setDisplay(false)
+        })
     }
 
 
     return (
-        <ul  className="dropdown-menu" >
+        <ul style={props.display?{display:'none'}:null} className="dropdown-menu" >
             <li className="dropdown-menu__content">
                 <div className="dropdown-menu__img">
                     <img src={require('../../images/header-submenu-1.jpg')} alt="девочка" />
