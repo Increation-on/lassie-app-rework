@@ -32,11 +32,12 @@ const rootReducer = combineReducers({
     totalAmount: productInfoReducer,    
     productInfo: productInfoReducer,
     location: productInfoReducer,
+    likes: productInfoReducer,
 
     category: catalogReducer,
     description: catalogReducer,
 
-    orderInfo: orderReducer,
+    // orderInfo: orderReducer,
 
     filterItems: filterReducer,
     filterInfo: filterReducer,

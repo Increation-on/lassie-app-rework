@@ -20,7 +20,7 @@ const HeaderDropdownMenu = (props) => {
 
 
     return (
-        <ul className="dropdown-menu" >
+        <ul  className="dropdown-menu" >
             <li className="dropdown-menu__content">
                 <div className="dropdown-menu__img">
                     <img src={require('../../images/header-submenu-1.jpg')} alt="девочка" />

@@ -50,8 +50,6 @@ const CardInfo = (props) => {
         }
         dispatch(addProductInfoAction(prodInfo));
         
-
-        setProductSize(null);
         setCount(0);
         setProductPrice(null);
     }

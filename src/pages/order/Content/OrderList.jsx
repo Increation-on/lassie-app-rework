@@ -36,7 +36,7 @@ const OrderList = (props) => {
             <legend className="form__title">Состав заказа</legend>
             <button 
                     type="button" 
-                    style={{marginBottom: "40px"}} 
+                    style={{marginBottom: "40px", borderRadius:"10px", backgroundColor: "#f29625"}} 
                     className="btn form__btn form__btn_align_right"
                     onClick={()=>clearBasket()}>Очистить корзину</button>
             <div className="goods-table">

@@ -22,6 +22,9 @@ const ProductPage = () => {
 
     const params = useParams();
     const paramsId = Number(params.id);
+    useEffect(()=>{
+        console.log(params)
+    }, [params])
 
     return products ? (
         <main className="content product-page">

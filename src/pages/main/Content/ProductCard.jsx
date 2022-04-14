@@ -1,18 +1,32 @@
 import { useState, useEffect } from "react";
-import { useDispatch } from "react-redux";
-import { addSumTotalAmountAction, addSumTotalPriceAction, addProductInfoAction } from "../../../store/reducers/productInfoReducer";
+import { useDispatch, useSelector } from "react-redux";
+import { addSumTotalAmountAction, addSumTotalPriceAction, addProductInfoAction, setLikesAction } from "../../../store/reducers/productInfoReducer";
 import { useParams, useLocation, Link } from "react-router-dom";
+import styled from "styled-components";
+import styles from '../styles/Main.module.css';
 
 
 const ProductCard = (props) => {
 
-    const product = props.productData;    
+    const product = props.productData;
     const dispatch = useDispatch();
 
     const [count, setCount] = useState(0);
     const [productPrice, setProductPrice] = useState(0);
     const [productSize, setProductSize] = useState(null);
+    const [likeCounter, setLikeCounter] = useState(0);
+    const [likeToggle, setLikeToggle] = useState(false);
 
+    const likeHandler = () => {
+        setLikeToggle(!likeToggle);
+        setLikeCounter(Number(!likeCounter));
+    }
+
+
+    // useEffect(() => {
+    //     console.log(likeToggle)
+    //     console.log(likeCounter)
+    // },[likeToggle, likeCounter]);
    
 
     const increment = () => {
@@ -33,7 +47,8 @@ const ProductCard = (props) => {
     const setBasket = (
         price, 
         amount, 
-        size, 
+        size,
+        likes, 
         title=product.title, 
         image=product.img, 
         currentPrice = product.price, 
@@ -48,6 +63,7 @@ const ProductCard = (props) => {
             price: price,
             amount: amount,
             size: size,
+            likes: likes,
             title: title,
             image: image,
             currentPrice: currentPrice,
@@ -57,8 +73,7 @@ const ProductCard = (props) => {
         }
 
         dispatch(addProductInfoAction(prodInfo));
-        
-        setProductSize(null);
+
         setCount(0);
         setProductPrice(null);
     }
@@ -69,6 +84,19 @@ const ProductCard = (props) => {
     if(product.discount){
           discounted = Math.trunc(product.price - (product.price * (product.discount/100)));
     }
+
+    const activeLike = {
+        cursor: "pointer",
+        color: "red"
+    }
+
+    const inactiveLike = {
+        cursor: "pointer"
+    }
+
+    
+
+
     
 
     return (
@@ -87,7 +115,7 @@ const ProductCard = (props) => {
                                         null
                         })}
                     </Link>
-                    <a href="#" className="like">Мне нравится</a>
+                    <a style={likeToggle?activeLike:inactiveLike} onClick={likeHandler} className="like">Мне нравится</a>
                     <h4 className="good__name">{product.title}</h4>
                     <div className="good__price-wrapper">
                         {product.discount?
@@ -106,7 +134,7 @@ const ProductCard = (props) => {
                             <label className="good__order-label">Выберите размер</label>
                             {product.sizes.map(el => {
                                 return (
-                                    <div key={el.id} className="checkbox-tile">
+                                    <div key={el.id} style={{marginLeft: "4px"}} className="checkbox-tile">
                                         <input
                                             onClick={(e)=>setProductSize(e.target.value)} 
                                             disabled={!el.available} 
@@ -132,7 +160,7 @@ const ProductCard = (props) => {
                             </div>
                         </div>
                         <button 
-                            onClick={() => setBasket(productPrice, count, productSize)} 
+                            onClick={() => setBasket(productPrice, count, productSize, likeCounter)} 
                             type="button"
                             disabled={!count || !productSize}
                             style={!count || !productSize?{backgroundColor:"gray"}:{backgroundColor:"#0076bd"}} 

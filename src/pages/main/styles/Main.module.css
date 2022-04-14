@@ -538,3 +538,10 @@ input[type="number"]:focus {
     transition: background-color .4s ease;
     cursor: pointer;
 }
+
+
+
+.good {
+    position: relative;
+    width: 210px;
+}

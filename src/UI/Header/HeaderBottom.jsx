@@ -41,7 +41,7 @@ const HeaderBottom = (props) => {
                                                 <span className="header__sale">{el.title}</span></a>
                                             : <Link to={el.path} onClick={()=>setBottomMenuItem(el.title)} onMouseMove={()=>setNavItem(el.title)} className="menu__name">{el.title}</Link>
                                         }
-                                        <HeaderDropdownMenu navItem={navItem} setHeadBotMenuItem={setBottomMenuItem}  item = {el.item} menuId={el.id} />
+                                        <HeaderDropdownMenu style={{display:"none"}} navItem={navItem} setHeadBotMenuItem={setBottomMenuItem}  item = {el.item} menuId={el.id} />
                                     </li>
                         })} 
                     </ul>
