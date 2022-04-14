@@ -13,8 +13,6 @@ const MainPagePopular = () => {
         dispatch(fetchProducts());
     }, []);
 
-   
-
     return (
         <section className="popular">
             <div className="container">

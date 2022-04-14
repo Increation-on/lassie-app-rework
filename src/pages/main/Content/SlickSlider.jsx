@@ -2,20 +2,13 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import Slider from "react-slick";
 import slide from '../../../images/slider-1.jpg';
-import  styled  from 'styled-components';
 import styles from '../styles/Main.module.css';
 
 
 const SimpleSlider = () => {
 
-    const NexDiv = styled.div`
-        &:hover {
-
-        }
-    `
-
     function SampleNextArrow(props) {
-        const { className, style, onClick } = props;
+        const { style, onClick } = props;
         return (
           <div
             className={styles.slick_next}
@@ -26,7 +19,7 @@ const SimpleSlider = () => {
       }
 
       function SamplePrevArrow(props) {
-        const { className, style, onClick } = props;
+        const { style, onClick } = props;
         return (
           <div
             className={styles.slick_prev}
@@ -42,7 +35,7 @@ const SimpleSlider = () => {
         speed: 600,
         slidesToShow: 1,
         slidesToScroll: 1,
-        autoplay:false,
+        autoplay:true,
         autoplaySpeed: 4000,
         className: "index__slider slider",
         prevArrow: <SamplePrevArrow />,
