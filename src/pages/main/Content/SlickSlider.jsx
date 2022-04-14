@@ -3,15 +3,22 @@ import "slick-carousel/slick/slick-theme.css";
 import Slider from "react-slick";
 import slide from '../../../images/slider-1.jpg';
 import  styled  from 'styled-components';
+import styles from '../styles/Main.module.css';
 
 
 const SimpleSlider = () => {
+
+    const NexDiv = styled.div`
+        &:hover {
+
+        }
+    `
 
     function SampleNextArrow(props) {
         const { className, style, onClick } = props;
         return (
           <div
-            className={className}
+            className={styles.slick_next}
             style={{ ...style, display: "block", right:"30px", zIndex: "1000" }}
             onClick={onClick}
           />
@@ -22,7 +29,7 @@ const SimpleSlider = () => {
         const { className, style, onClick } = props;
         return (
           <div
-            className={className}
+            className={styles.slick_prev}
             style={{ ...style, display: "block", left:"15px", zIndex: "1000" }}
             onClick={onClick}
           />
