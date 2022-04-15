@@ -1,6 +1,6 @@
 import { useSelector } from "react-redux";
 import { useNavigate } from 'react-router-dom';
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 
 const OrderList = (props) => {
@@ -19,11 +19,13 @@ const OrderList = (props) => {
         
     }
 
+    const [storage, setStorage] = useState(storageExist);
+
     let key = 1;
 
-    useEffect(() => {
-        console.log("prInfo: ", productInfo);
-    },[])
+    // useEffect(() => {
+        
+    // },[storage])
 
   
     

@@ -53,9 +53,8 @@ const CatalogPage = () => {
         }
     }
 
-    const [checked, setChecked ] = useState(false);
 
-    const getFilterValue = (val, check) => { ///////////////////cheked from checkboxes of FilterTest !!! if !check => disabled ={true}
+    const getFilterValue = (val) => { 
         switch(val[0]) {
             case "season":
                 setSeasonValue(convertValue(val))
@@ -78,7 +77,6 @@ const CatalogPage = () => {
             default:
                 return                        
         }
-        setChecked(check)
     }
 
     
@@ -113,6 +111,7 @@ const CatalogPage = () => {
            minPrice: Number(minPrice),
            maxPrice: Number(maxPrice)
         });
+        
     }, [seasonValue, collectionValue, genderValue, sizeValue, availableValue, colorValue, minPrice, maxPrice]);
 
 
@@ -142,6 +141,7 @@ const CatalogPage = () => {
     //   };
 
 
+
     return (
         <main className="content catalog-page">
             <div className="container">
@@ -166,8 +166,8 @@ const CatalogPage = () => {
                                 </div>
                             </div>
                         </div>
-                        <button disabled={!minPrice && !maxPrice && !checked }
-                                style={!minPrice && !maxPrice && !checked ? {backgroundColor:"gray"} : {backgroundColor:"#0076bd"}} 
+                        <button disabled={!minPrice && !maxPrice && !seasonValue.length && !collectionValue.length && !genderValue.length && !colorValue.length && !sizeValue.length && !availableValue.length}
+                                style={!minPrice && !maxPrice && !seasonValue.length && !collectionValue.length && !genderValue.length && !colorValue.length && !sizeValue.length && !availableValue.length ? {backgroundColor:"gray"} : {backgroundColor:"#0076bd"}} 
                                 onClick={()=>dispatch(displayFilteredProductsAction(true))}  
                                 type="submit" className="btn">Показать товары</button>
                         </fieldset>
