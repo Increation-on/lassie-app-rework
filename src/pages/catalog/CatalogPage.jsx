@@ -42,7 +42,7 @@ const CatalogPage = () => {
 
     let convertValue = (arr) => {
         let objArr=[];
-        let str = "";
+        let str="";
         if(arr.length === 2){
             return str = arr[1];
         } else {
@@ -121,10 +121,6 @@ const CatalogPage = () => {
     }, [sortCategory]);
 
 
-    // useEffect(() => {
-    //     console.log("store: ", displayFilteredProducts);
-    //     // console.log("state: ", renderFilteredData);
-    // },[displayFilteredProducts, sortCategory]);
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -140,17 +136,19 @@ const CatalogPage = () => {
     //     setFilteredData(data);
     //   };
 
-
+    const [showFilter, setShowFilter] = useState(false);
+    const [showText, setShowText] = useState(false);
 
     return (
         <main className="content catalog-page">
             <div className="container">
                 <h1>{catalogHead}</h1>
-                <p data-block='0' className="catalog-page__text">{description}</p>
-                <a href="#" data-btn='0' data-text="Скрыть текст" className="js-block-show link text">Читать далее</a>
-                <a href="#" data-btn='1' data-text="Скрыть фильтр" className="js-block-show link text">Показать фильтр</a>
+                <p data-block='0' className={showText?"catalog-page__text block-show":"catalog-page__text"}>{description}</p>
+                <a style={{cursor:"pointer"}} onClick={()=>setShowText(!showText)} data-btn='0' data-text="Скрыть текст" className="js-block-show link text">{showText?"Скрыть текст":"Читать далее"}</a>
+                <a style={{cursor:"pointer"}} onClick={()=>setShowFilter(!showFilter)}  data-btn='1' data-text="Скрыть фильтр" className="js-block-show link text">{showFilter?"Скрыть фильтр":"Показать фильтр"}</a>
                 <div className="catalog catalog-page__catalog">
-                    <form onSubmit={handleSubmit} method="post" data-block='1' className="catalog-page__filter catalog__filter form">
+                    <form onSubmit={handleSubmit} method="post" data-block='1' 
+                            className={showFilter?"catalog-page__filter catalog__filter form block-show":"catalog-page__filter catalog__filter form"}>
                         <fieldset className="form__fieldset">
                             <legend className="form__title form__title_align_center">Фильтр</legend>
                             {filterItems.map((el) => {

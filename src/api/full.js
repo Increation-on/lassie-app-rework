@@ -3672,7 +3672,7 @@
                 }, c.sortStable = u.split("").sort(B).join("") === u, c.detectDuplicates = !!l, m(), c.sortDetached = ja(function(a) {
                     return 1 & a.compareDocumentPosition(n.createElement("div"))
                 }), ja(function(a) {
-                    return a.innerHTML = "<a href='#'></a>", "#" === a.firstChild.getAttribute("href")
+                    return a.innerHTML = "<a href='/catalog'></a>", "/catalog" === a.firstChild.getAttribute("href") //??????????????????????
                 }) || ka("type|href|height|width", function(a, b, c) {
                     return c ? void 0 : a.getAttribute(b, "type" === b.toLowerCase() ? 1 : 2)
                 }), c.attributes && ja(function(a) {

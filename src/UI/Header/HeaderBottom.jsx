@@ -16,6 +16,8 @@ const HeaderBottom = (props) => {
 
     const [displayDropdown, setDisplayDropdown] = useState(false);
 
+    const [showCollapse, setShowCollapse] = useState(false);
+
     useEffect( () => {
         props.getNav(bottomMenuItem);
     }, [bottomMenuItem])
@@ -30,6 +32,16 @@ const HeaderBottom = (props) => {
 
     const buttonMenu = [...menu].reverse();
 
+    const setItemAndHideDropdown = (title) => {
+        setBottomMenuItem(title);
+        setDisplayDropdown(true);
+        setShowCollapse(true)
+        setTimeout(()=>{
+            setDisplayDropdown(false);
+            // setShowCollapse(false);   
+        },2000)
+    }
+
     
     return (
         <div className="header__bottom">
@@ -39,9 +51,12 @@ const HeaderBottom = (props) => {
                         {menu.map(el => {
                             return  <li key={el.id} className="menu__item">
                                         {el.sale?
-                                            <a href="#" className="header__sale-wrapper menu__name">
-                                                <span className="header__sale">{el.title}</span></a>
-                                            : <Link to={el.path} onClick={()=>setBottomMenuItem(el.title)} onMouseMove={()=>setNavItem(el.title)} className="menu__name">{el.title}</Link>
+                                            <Link to={el.path} onClick={()=>setItemAndHideDropdown(el.title)} onMouseMove={()=>setNavItem(el.title)} className="header__sale-wrapper menu__name">
+                                                <span className="header__sale">{el.title}</span>
+                                            </Link>
+                                            : <Link to={el.path} onClick={()=>setItemAndHideDropdown(el.title)} onMouseMove={()=>setNavItem(el.title)} className="menu__name">
+                                                {el.title}
+                                            </Link>
                                         }
                                         <HeaderDropdownMenu  
                                             display={displayDropdown}
@@ -57,11 +72,11 @@ const HeaderBottom = (props) => {
                     <button className="burger-btn header__nav-btn js-nav-btn">
                         <span className="burger-btn__switch">Развернуть меню </span>
                     </button>
-                    <div className="navigation__collapse">
+                    <div style={showCollapse?{zIndex:"2000", display: "none"}:{zIndex:"2000", display: "block"}} className="navigation__collapse">
                         <ul className="navigation__collapse-menu vertical-menu">
                             {buttonMenu.map(el=> {
                                 return <li key={el.id} className="navigation__collapse-item vertical-menu__item">
-                                            <a href="#" className="vertical-menu__name">{el.title}</a>
+                                            <Link onClick={()=>setItemAndHideDropdown(el.title)} onMouseMove={()=>setNavItem(el.title)}  to={el.path} className="vertical-menu__name">{el.title}</Link>
                                         </li>
                             })}
                         </ul>
