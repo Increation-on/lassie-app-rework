@@ -14,6 +14,8 @@ const ADD_PRODUCT_INFO = "ADD_PRODUCT_INFO";
 const GET_PRODUCTS = "GET_PRODUCTS";
 const ADD_LOCATION = "ADD_LOCATION";
 const SET_LIKES = "SET_LIKES";
+const RESET_TOTAL_PRICE = "RESET_TOTAL_PRICE";
+const RESET_TOTAL_AMOUNT = "RESET_TOTAL_AMOUNT";
 
 export const productInfoReducer = (state = initialState, action) => {
     switch (action.type) {
@@ -23,12 +25,16 @@ export const productInfoReducer = (state = initialState, action) => {
             return {...state, totalPrice: state.totalPrice + action.payload }
         case SUM_TOTAL_AMOUNT:
             return {...state, totalAmount: state.totalAmount + action.payload }
+        case RESET_TOTAL_PRICE:
+            return {...state, totalPrice: 0}
+        case RESET_TOTAL_AMOUNT:
+            return {...state, totalAmount: 0}       
         case ADD_PRODUCT_INFO: 
             return {...state, productInfo: [...state.productInfo, action.payload] }
         case ADD_LOCATION: 
-            return {...state, location: action.payload}
+            return {...state, location: action.payload } 
         case SET_LIKES:
-            return {...state, likes: state.likes +  action.payload}                                         
+            return {...state, likes: state.likes + action.payload}                                         
         default:
             return state
     }
@@ -57,5 +63,13 @@ export const addLocationAction = (payload) => {
 
 export const setLikesAction = (payload) => {
     return {type: SET_LIKES, payload}
+}
+
+export const resetTotalPriceAction = () => {
+    return {type: RESET_TOTAL_PRICE}
+}
+
+export const resetTotalAmountAction = () => {
+    return {type: RESET_TOTAL_AMOUNT}
 }
 

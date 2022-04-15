@@ -1,12 +1,14 @@
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from 'react-router-dom';
 import { useEffect, useState } from "react";
+import { resetTotalAmountAction, resetTotalPriceAction } from "../../../store/reducers/productInfoReducer";
 
 
 const OrderList = (props) => {
 
     const totalProductPrice = useSelector(state => state.totalPrice.totalPrice);
     const productInfo = useSelector(state => state.productInfo.productInfo);
+    const dispatch = useDispatch();
 
     const storageExist = localStorage.getItem("persist:root");
     
@@ -14,20 +16,15 @@ const OrderList = (props) => {
     
     const clearBasket = () => {
         localStorage.clear();
+        dispatch(resetTotalPriceAction());
+        dispatch(resetTotalAmountAction())
         navigate('/main');
         document.location.reload();
+                
         
     }
 
-    const [storage, setStorage] = useState(storageExist);
-
     let key = 1;
-
-    // useEffect(() => {
-        
-    // },[storage])
-
-  
     
     const nds = Math.trunc(totalProductPrice * 0.2);
 

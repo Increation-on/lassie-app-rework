@@ -172,7 +172,6 @@ const CatalogPage = () => {
                                 type="submit" className="btn">Показать товары</button>
                         </fieldset>
                     </form>
-                    {/* <Filter filterItems = {filterItems}/> */}
                     <div className="catalog__main">
                         <CatalogSort/>
                         <div className="catalog__goods-wrapper">
