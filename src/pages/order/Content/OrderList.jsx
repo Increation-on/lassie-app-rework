@@ -1,7 +1,7 @@
 import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from 'react-router-dom';
 import { useEffect, useState } from "react";
-import { resetTotalAmountAction, resetTotalPriceAction } from "../../../store/reducers/productInfoReducer";
+import { resetProductInfoAction, resetTotalAmountAction, resetTotalPriceAction } from "../../../store/reducers/productInfoReducer";
 
 
 const OrderList = (props) => {
@@ -17,11 +17,9 @@ const OrderList = (props) => {
     const clearBasket = () => {
         localStorage.clear();
         dispatch(resetTotalPriceAction());
-        dispatch(resetTotalAmountAction())
+        dispatch(resetTotalAmountAction());
+        dispatch(resetProductInfoAction());
         navigate('/main');
-        document.location.reload();
-                
-        
     }
 
     let key = 1;
