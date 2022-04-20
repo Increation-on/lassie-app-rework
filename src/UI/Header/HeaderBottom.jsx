@@ -39,7 +39,7 @@ const HeaderBottom = (props) => {
         setTimeout(()=>{
             setDisplayDropdown(false);
             // setShowCollapse(false);   
-        },2000)
+        },1500)
     }
 
     

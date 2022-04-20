@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { addSumTotalAmountAction, addSumTotalPriceAction, addProductInfoAction, setLikesAction } from "../../../store/reducers/productInfoReducer";
-import { useParams, useLocation, Link } from "react-router-dom";
+import { useParams, useLocation, Link, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import styles from '../styles/Main.module.css';
 
@@ -94,8 +94,13 @@ const ProductCard = (props) => {
         cursor: "pointer"
     }
 
-    
+    const navigate = useNavigate();
 
+    
+    const customNavigate = () => {
+        navigate(`${product.url}/${product.id}`)
+        window.location.reload()
+    }
 
     
 
@@ -103,7 +108,7 @@ const ProductCard = (props) => {
         <li className="goods__item">
             <article className="good">
                 <div className="good__content">
-                    <Link to={`${product.url}/${product.id}`} className="good__link">
+                    <Link onClick={()=>customNavigate()} to={`${product.url}/${product.id}`} className="good__link">
                         <img src={product.img} alt="Товар" className="good__img" title={product.title} />
                         {product.mark.map(el => {
                             return el.new ?

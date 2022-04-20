@@ -91,11 +91,11 @@ const CatalogPage = () => {
         dispatch(fetchFilteredProducts());
     }, []);
 
-    const [renderFilteredData, setRenderFilteredData] = useState(false);
+    // const [renderFilteredData, setRenderFilteredData] = useState(false);
 
-    useEffect(() => {
-        dispatch(displayFilteredProductsAction(renderFilteredData));
-    },[renderFilteredData]);
+    // useEffect(() => {
+    //     dispatch(displayFilteredProductsAction(renderFilteredData));
+    // },[renderFilteredData]);
 
    
 
@@ -207,12 +207,10 @@ const CatalogPage = () => {
                         </div>
                     </div>
                 </div>
-
-
-
-                <p data-block='2' className="catalog-page__text">Шапочки, кепки и шляпы Lassie® защищают круглый год. Выбирайте подходящий головной убор: шляпку с полями или кепку с козырьком на лето, тоненькую шапочку без подкладки на осень или весну, и шапку с подкладкой из флиса или джерси на зиму. Многие наши
-                    шапочки имеют специальные ветронепроницаемые вставки в области ушей для дополнительной защиты. Для самых маленьких лучшим выбором во время метели и снежной бури станут наши ветрозащитные зимние шапки или шапки из искусственного меха.</p><a href="#"
-                        data-btn='2' data-text="Скрыть текст" className="js-block-show link text">Читать далее</a>
+                <p data-block='2' className="catalog-page__text">
+                    Шапочки, кепки и шляпы Lassie® защищают круглый год. Выбирайте подходящий головной убор: шляпку с полями или кепку с козырьком на лето, тоненькую шапочку без подкладки на осень или весну, и шапку с подкладкой из флиса или джерси на зиму. Многие наши
+                    шапочки имеют специальные ветронепроницаемые вставки в области ушей для дополнительной защиты. Для самых маленьких лучшим выбором во время метели и снежной бури станут наши ветрозащитные зимние шапки или шапки из искусственного меха.</p>
+                    <a href="#" data-btn='2' data-text="Скрыть текст" className="js-block-show link text">Читать далее</a>
             </div>
         </main>
     )
