@@ -1,24 +1,86 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
+import { useForm } from "react-hook-form";
+import capcha from "../../images/capcha.jpg";
+import RequestService from "../../api/RequestService";
 
 const CardTabs = (props) => {
 
     const product = props.prod;
     let key = 1;
 
+    const {
+        register,
+        formState: {
+          errors,
+          isValid
+        },
+        handleSubmit,
+        reset,
+        watch
+      } = useForm({
+        mode: 'onBlur'
+      });
+
+    // useEffect( () => {
+    //     console.log(errors);
+    // }, [errors])
+
+    const [name, setName] = useState('');
+    const [email, setEmail] = useState('');
+    const [message, setMessage] = useState('');
+    const [spamProtect, setSpamProtect] = useState('');
+
+    const resetForm = () => {
+        setSpamProtect('');
+        setName('');
+        setMessage('');
+        setEmail('');
+        setSpamProtect('');
+    }
+
+    const [postValue, setPostValue] = useState();
+
+    useEffect(() => {
+        setPostValue({
+            name: name,
+            email: email,
+            message: message,
+            spamProtect: spamProtect
+        })
+    }, [name, email, spamProtect, email]);
+
+    const customSubmit = (e) => {
+        e.preventDefault();
+        alert(JSON.stringify(postValue));
+        setSpamProtect('');
+        setName('');
+        setMessage('');
+        setEmail('');
+        setSpamProtect('');
+
+    }
+
+     const onFormSubmit = async (e) => {
+        e.preventDefault();
+        const response = await RequestService.postReviewData(postValue);
+        const data = await response.json;
+        console.log(data);
+      };
+
     return (
         <div className="card__tabs tabs">
             <ul className="tabs__nav">
                 <li data-tab='1' className="tabs__nav-item tabs__nav-item_active">
-                    <a href="#" className="tabs__nav-link">Описание</a>
+                    <a style={{cursor:"pointer"}} className="tabs__nav-link">Описание</a>
                 </li>
                 <li data-tab='2' className="tabs__nav-item">
-                    <a href="#" className="tabs__nav-link">Состав</a>
+                    <a style={{cursor:"pointer"}} className="tabs__nav-link">Состав</a>
                 </li>
                 <li data-tab='3' className="tabs__nav-item">
-                    <a href="#" className="tabs__nav-link">Уход</a>
+                    <a style={{cursor:"pointer"}} className="tabs__nav-link">Уход</a>
                 </li>
                 <li data-tab='4' className="tabs__nav-item">
-                    <a href="#" className="tabs__nav-link">Отзывы <span className="card__reviews-num">74</span></a>
+                    <a style={{cursor:"pointer"}} className="tabs__nav-link">Отзывы <span className="card__reviews-num">74</span></a>
                 </li>
             </ul>
             <div className="tabs__content-wrapper">
@@ -74,7 +136,12 @@ const CardTabs = (props) => {
                                 </footer>
                             </article>
                             <article className="review reviews__item">
-                                <div className="raiting review__raiting"><span className="raiting__star raiting__star_active">5 звезда</span><span className="raiting__star">4 звезды</span><span className="raiting__star">3 звезды</span><span className="raiting__star">2 звезды</span><span className="raiting__star">1 звёзд</span>
+                                <div className="raiting review__raiting">
+                                    <span className="raiting__star raiting__star_active">5 звезд</span>
+                                    <span className="raiting__star">4 звезды</span>
+                                    <span className="raiting__star">3 звезды</span>
+                                    <span className="raiting__star">2 звезды</span>
+                                    <span className="raiting__star">1 звёзда</span>
                                 </div>
                                 <div className="review__message">
                                     <p className="text">Очень теплая и качественная одежда. Рекомендую!</p>
@@ -89,7 +156,7 @@ const CardTabs = (props) => {
                         <div className="reviews__own">
                             <article className="review-form">
                                 <h3 className="title">Оставить отзыв</h3>
-                                <form method="post" action="" className="form js-form-validate">
+                                <form onSubmit={onFormSubmit}  action="" className="form js-form-validate">
                                     <div className="form__row">
                                         <div className="form__col form__col_width_130">
                                             <label className="form__label">Оцените товар</label>
@@ -114,7 +181,7 @@ const CardTabs = (props) => {
                                             <label htmlFor="review-name" className="form__label">Ваше имя</label>
                                         </div>
                                         <div className="form__col form__col_width_260">
-                                            <input id="review-name" name="Review[name]" required className="input" type="text" />
+                                            <input onChange={(e)=>setName(e.target.value)} value={name} required  id="review-name" name="Review[name]" className="input" type="text"/>
                                         </div>
                                     </div>
                                     <div className="form__row">
@@ -122,7 +189,7 @@ const CardTabs = (props) => {
                                             <label htmlFor="review-email" className="form__label">Электронная почта</label>
                                         </div>
                                         <div className="form__col form__col_width_260">
-                                            <input id="review-email" name="Review[email]" type="email" required className="input" />
+                                            <input onChange={(e)=>setEmail(e.target.value)} required value={email} id="review-email" name="Review[email]" type="email"  className="input" />
                                         </div>
                                     </div>
                                     <div className="form__row">
@@ -130,7 +197,7 @@ const CardTabs = (props) => {
                                             <label htmlFor="review-message" className="form__label">Ваше сообщение</label>
                                         </div>
                                         <div className="form__col form__col_width_400">
-                                            <textarea id="review-message" name="Review[message]" required className="textarea"></textarea>
+                                            <textarea onChange={(e)=>{setMessage(e.target.value)}} value={message} id="review-message" name="Review[message]" required className="textarea"></textarea>
                                         </div>
                                     </div>
                                     <div className="form__row review-form__antispam-row">
@@ -138,10 +205,11 @@ const CardTabs = (props) => {
                                             <label htmlFor="review-spam" className="form__label">Защита от спама</label>
                                         </div>
                                         <div className="form__col form__col_width_130">
-                                            <input id="review-spam" name="Review[spam]" required className="input" type="text" /><a href="#" className="link review-form__refresh-captcha text">Обновить картинку</a>
+                                            <input onChange={(e)=>setSpamProtect(e.target.value)} value={spamProtect} id="review-spam" name="Review[spam]" required className="input" type="text" />
+                                            <a style={{cursor:"pointer"}} className="link review-form__refresh-captcha text">Обновить картинку</a>
                                         </div>
                                         <div className="form__col form__col_width_130">
-                                            <img src="assets/images/capcha.jpg" alt="защита от спама" />
+                                            <img src={capcha} alt="защита от спама" />
                                         </div>
                                     </div>
                                     <div className="form__row review-form__btn-row">
@@ -149,7 +217,7 @@ const CardTabs = (props) => {
                                             <button type="submit" className="btn review-form__submit">Оставить отзыв</button>
                                         </div>
                                         <div className="form__col review-form__reset-col">
-                                            <button type="reset" className="form__reset link text">Очистить форму</button>
+                                            <button onClick={resetForm} type="reset" className="form__reset link text">Очистить форму</button>
                                         </div>
                                     </div>
                                 </form>

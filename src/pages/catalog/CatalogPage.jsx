@@ -57,21 +57,41 @@ const CatalogPage = () => {
     const getFilterValue = (val) => { 
         switch(val[0]) {
             case "season":
-                setSeasonValue(convertValue(val))
+                if(convertValue(val).length === 0 ){
+                    setSeasonValue("")
+                } else {
+                    setSeasonValue(convertValue(val))
+                }
                 break
             case "collection":
-                setCollectionValue(convertValue(val))
+                if(convertValue(val).length === 0 ){
+                    setCollectionValue("")
+                } else {
+                    setCollectionValue(convertValue(val))
+                }
                 break
             case "gender":
+                if(convertValue(val).length === 0 ){
+                    setGenderValue("")
+                } else
                 setGenderValue(convertValue(val))
                 break
-            case "size": 
+            case "size":
+                if(convertValue(val).length === 0 ){
+                    setSizeValue("")
+                } else 
                 setSizeValue(convertValue(val))
                 break
             case "color":
+                if(convertValue(val).length === 0 ){
+                    setColorValue("")
+                } else
                 setColorValue(convertValue(val))
                 break
             case "availability":
+                if(convertValue(val).length === 0 ){
+                    setAvailableValue("")
+                } else
                 setAvailableValue(convertValue(val))
                 break
             default:
@@ -83,10 +103,6 @@ const CatalogPage = () => {
 
     useEffect(() => {
         dispatch(fetchFilter());
-        dispatch(fetchSortedByPriceProducts());
-        dispatch(fetchSortedByPopularProducts());
-        dispatch(fetchSortedByNewProducts());
-        dispatch(fetchSortedByAvailableProducts());
         dispatch(fetchUnsortedProducts());
         dispatch(fetchFilteredProducts());
     }, []);
@@ -127,14 +143,12 @@ const CatalogPage = () => {
         alert(JSON.stringify(generalFilter))
     }
 
-    // const onFormSubmit = async (e) => {
-    //     e.preventDefault();
-    //     console.log(generalFilter)
-    //     const response = await RequestService.postFilterData(generalFilter);
-    //     const data = await response.json();
-    //     console.log(data);
-    //     setFilteredData(data);
-    //   };
+    const onFormSubmit = async (e) => {
+        e.preventDefault();
+        const response = await RequestService.postFilterData(generalFilter);
+        const data = await response.json;
+        console.log(data);
+      };
 
     const [showFilter, setShowFilter] = useState(false);
     const [showText, setShowText] = useState(false);
@@ -147,7 +161,7 @@ const CatalogPage = () => {
                 <a style={{cursor:"pointer"}} onClick={()=>setShowText(!showText)} data-btn='0' data-text="Скрыть текст" className="js-block-show link text">{showText?"Скрыть текст":"Читать далее"}</a>
                 <a style={{cursor:"pointer"}} onClick={()=>setShowFilter(!showFilter)}  data-btn='1' data-text="Скрыть фильтр" className="js-block-show link text">{showFilter?"Скрыть фильтр":"Показать фильтр"}</a>
                 <div className="catalog catalog-page__catalog">
-                    <form onSubmit={handleSubmit} method="post" data-block='1' 
+                    <form onSubmit={onFormSubmit} method="post" data-block='1' 
                             className={showFilter?"catalog-page__filter catalog__filter form block-show":"catalog-page__filter catalog__filter form"}>
                         <fieldset className="form__fieldset">
                             <legend className="form__title form__title_align_center">Фильтр</legend>

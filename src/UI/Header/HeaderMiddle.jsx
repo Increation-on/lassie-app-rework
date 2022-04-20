@@ -32,7 +32,7 @@ const HeaderMiddle = (props) => {
                     <span className="header__icon icon-bag"></span>
                     <div className="header__basket">
                         <div className="text">
-                            {!totalAmount && !totalPrice ? "Ваша корзина пуста" : "В вашей корзине"}
+                            {!totalAmount && !totalPrice ? <span style={{marginTop:"10px", display:"block"}}>Ваша корзина пуста</span> : "В вашей корзине"}
                         </div>
                         {!totalAmount && !totalPrice ? null : <Link to="/order" className="link">
                             {totalAmount} {totalAmount == 1 ? "товар" :

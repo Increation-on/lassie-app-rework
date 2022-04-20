@@ -6,6 +6,7 @@ import OrderList from './../OrderList';
 import DeliveryMethod from './DeliveryMethod';
 import PaymentMethod from './PaymentMethod';
 import { useState } from 'react';
+import RequestService from '../../../../api/RequestService';
 
 
 const OrderPageContent = () => {
@@ -26,9 +27,11 @@ const OrderPageContent = () => {
 
     const [toggleErr, setToggleErr] = useState(true);
 
-    const onFormSubmit = (data) => {
-        alert(JSON.stringify(data));
-        reset();
+    const onFormSubmit = async (data, e) => {
+        e.preventDefault();
+        const response = await RequestService.postOrderData(data);
+        const formData = await response.json;
+        console.log(formData);
     }
 
 

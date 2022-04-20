@@ -97,18 +97,18 @@ const ProductCard = (props) => {
     const navigate = useNavigate();
 
     
-    const customNavigate = () => {
-        navigate(`${product.url}/${product.id}`)
-        window.location.reload()
-    }
+    // const customNavigate = () => {
+    //     navigate(`${product.url}/${product.id}`)
+    //     window.location.reload()
+    // }
 
-    
+    // onClick={()=>customNavigate()} 
 
     return (
         <li className="goods__item">
             <article className="good">
                 <div className="good__content">
-                    <Link onClick={()=>customNavigate()} to={`${product.url}/${product.id}`} className="good__link">
+                    <Link to={`${product.url}/${product.id}`} className="good__link">
                         <img src={product.img} alt="Товар" className="good__img" title={product.title} />
                         {product.mark.map(el => {
                             return el.new ?

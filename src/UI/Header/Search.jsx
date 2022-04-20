@@ -19,13 +19,13 @@ const Search = () => {
 
     const navigate = useNavigate();
 
-    // const customRedirect = (path) => {
-    //     navigate(path);
-    //     window.location.reload();
-    //     setValue('');
-    // }
+    const customRedirect = (path) => {
+        navigate(path);
+        window.location.reload();
+        setValue('');
+    }
    
-    // onClick={()=>customRedirect(`${product.url}/${product.id}`)}
+   
    
     return (
         <form className={`${styles.header__search} ${styles.search}`}>
@@ -42,7 +42,7 @@ const Search = () => {
                     {filteredProducts.map(product=>{
                        return  value ?
                          <li key={product.id} className={styles.autocomplete__item}>
-                             <Link  style={{textDecoration:"none", color:"black"}} 
+                             <Link   onClick={()=>customRedirect(`${product.url}/${product.id}`)}  style={{textDecoration:"none", color:"black"}} 
                                    to={`${product.url}/${product.id}`}> {product.title} </Link>
                         </li>
                          : null

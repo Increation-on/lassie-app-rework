@@ -23,7 +23,7 @@ const Header = (props) => {
 
     const pathName = location.pathname;
 
-    const [route, setRoute] = useState({to: pathName, from: pathName})
+    const [route, setRoute] = useState({from: pathName, to: pathName })
 
     
 
