@@ -15,29 +15,29 @@ const HeaderMiddle = (props) => {
 
 
     return (
-        <div className={styles.header__middle}>
-            <div className={`${styles.container} ${styles.header__container} ${styles.header__container_middle}`}>
+        <div className="header__middle">
+            <div className="container header__container header__container_middle">
                 <Logo location={location.pathname} />
-                <div className={styles.header__contacts}>
-                    <span className={`${styles.header__icon} ${styles.icon_comment}`}></span>
+                <div className="header__contacts">
+                    <span className="header__icon icon-comment"></span>
                     <HeaderMidContatcs tel={midTelFirst} info={midInfoFirst} />
                     <HeaderMidContatcs tel={midTelSecond} info={midInfoSecond} />
-                    <div className={`${styles.header__col} ${styles.header__col_contacts}`}>
-                        <div className={styles.contacts}>
-                            <a href="#" className={styles.link}>Контактная иформация</a>
+                    <div className="header__col header__col_contacts">
+                        <div className="contacts">
+                            <a href="#" className="link">Контактная иформация</a>
                         </div>
                     </div>
                 </div>
-                <div className={`${styles.header__col} ${styles.header__col_basket}`}>
-                    <span className={`${styles.header__icon} ${styles.icon_bag}`}></span>
-                    <div className={styles.header__basket}>
-                        <div style={!totalAmount && !totalPrice ? { marginTop: "10px" } : null} className={styles.text}>
-                            {!totalAmount && !totalPrice ? <span>Ваша корзина пуста</span> : <span>В вашей корзине</span>}
+                <div className="header__col header__col_basket">
+                    <span className="header__icon icon-bag"></span>
+                    <div className="header__basket">
+                        <div className="text">
+                            {!totalAmount && !totalPrice ? "Ваша корзина пуста" : "В вашей корзине"}
                         </div>
-                        {!totalAmount && !totalPrice ? null : <Link to="/order" className={styles.link}>
-                            {totalAmount} {totalAmount == 1 ? <span>товар</span> :
-                                totalAmount > 1 && totalAmount <= 4 ? <span>товара</span> :
-                                    totalAmount > 4 ? <span>товаров</span> : null} на {totalPrice} руб.</Link>}
+                        {!totalAmount && !totalPrice ? null : <Link to="/order" className="link">
+                            {totalAmount} {totalAmount == 1 ? "товар" :
+                                totalAmount > 1 && totalAmount <= 4 ? "товара" :
+                                    totalAmount > 4 ? "товаров" : null} на {totalPrice} руб.</Link>}
                     </div>
                 </div>
             </div>

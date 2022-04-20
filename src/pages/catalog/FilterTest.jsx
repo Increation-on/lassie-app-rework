@@ -39,7 +39,7 @@ const FilterTest = (props) => {
                     <div className="form__content-group">
                         {filterItems.items.map((item) => {
                             return (
-                                <div key={item.id} className="checkbox-tile checkbox-tile_size_big">
+                                <div style={{marginRight:"4px"}} key={item.id} className="checkbox-tile checkbox-tile_size_big">
                                     <input onChange={handleCheck} id={`filter-color-${item.id}`} name="Filter[color]" type="checkbox" value={item.title} className="checkbox-tile__elem" />
                                     <label htmlFor={`filter-color-${item.id}`} className={`checkbox-tile__label checkbox-tile__label_color_${item.name} checkbox-tile__label_type_color`}>{item.name}</label>
                                 </div>
@@ -50,7 +50,7 @@ const FilterTest = (props) => {
                         <div className="form__content-group">
                             {filterItems.items.map((item) => {
                                 return (
-                                    <div key={item.id} className="checkbox-tile checkbox-tile_size_big">
+                                    <div style={{marginRight: "4px"}} key={item.id} className="checkbox-tile checkbox-tile_size_big">
                                         <input onChange={handleCheck}  id={`filter-size-${item.id}`} name="Filter[size]" type="checkbox" value={item.title} className="checkbox-tile__elem" />
                                         <label htmlFor={`filter-size-${item.id}`} className={`checkbox-tile__label`}>{item.title}</label>
                                     </div>

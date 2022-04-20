@@ -4,7 +4,7 @@ const Popup = (props) => {
 
     const product = props.prod;
 
-    return  (
+    return product ? (
         <div data-popup="good" className="popup">
             <div className="popup-good popup__content">
                 <div className="popup-good__title">Товар добавлен в корзину</div>
@@ -16,7 +16,7 @@ const Popup = (props) => {
                 </div>
             </div>
         </div>
-    ) 
+    ) : <div>Loading...</div>
 }
 
 export default Popup;

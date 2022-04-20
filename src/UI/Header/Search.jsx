@@ -1,7 +1,7 @@
 import styles from '../styles/Header.module.css';
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 const Search = () => {
 
@@ -17,8 +17,15 @@ const Search = () => {
         return prod.title.toLowerCase().includes(value.toLowerCase())
     });
 
+    const navigate = useNavigate();
 
+    // const customRedirect = (path) => {
+    //     navigate(path);
+    //     window.location.reload();
+    //     setValue('');
+    // }
    
+    // onClick={()=>customRedirect(`${product.url}/${product.id}`)}
    
     return (
         <form className={`${styles.header__search} ${styles.search}`}>
@@ -26,7 +33,7 @@ const Search = () => {
                 type="search" 
                 name="seacrh"
                 value={value}
-                placeholder="Поиск по алфавиту" 
+                placeholder="Поиск по каталогу" 
                 className={styles.search__input} 
                 onChange={e=>setValue(e.target.value)}
                 autoсomplete="off" 
@@ -35,9 +42,8 @@ const Search = () => {
                     {filteredProducts.map(product=>{
                        return  value ?
                          <li key={product.id} className={styles.autocomplete__item}>
-                             <Link style={{textDecoration:"none", color:"black"}} 
-                                   to={`${product.url}/${product.id}`}
-                                   onClick={()=> setValue("")}> {product.title} </Link>
+                             <Link  style={{textDecoration:"none", color:"black"}} 
+                                   to={`${product.url}/${product.id}`}> {product.title} </Link>
                         </li>
                          : null
                     })}
