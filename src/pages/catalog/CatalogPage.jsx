@@ -7,7 +7,7 @@ import Filter from "./Filter";
 import FilterTest from "./FilterTest";
 import { fetchFilter, fetchFilteredProducts } from "../../store/asyncActions/asyncFilter";
 import { showAllGoodsAction, showMoreGoodsAction, sortProductsAction } from "../../store/reducers/sortReducer";
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { fetchUnsortedProducts, fetchSortedByPriceProducts, fetchSortedByPopularProducts, fetchSortedByNewProducts, fetchSortedByAvailableProducts } from './../../store/asyncActions/asyncSorting';
 import RequestService from './../../api/RequestService';
 import { displayFilteredProductsAction } from './../../store/reducers/filterReducer';
@@ -103,18 +103,13 @@ const CatalogPage = () => {
 
     useEffect(() => {
         dispatch(fetchFilter());
+        dispatch(fetchSortedByPriceProducts());
+        dispatch(fetchSortedByPopularProducts());
+        dispatch(fetchSortedByNewProducts());
+        dispatch(fetchSortedByAvailableProducts());
         dispatch(fetchUnsortedProducts());
         dispatch(fetchFilteredProducts());
     }, []);
-
-    // const [renderFilteredData, setRenderFilteredData] = useState(false);
-
-    // useEffect(() => {
-    //     dispatch(displayFilteredProductsAction(renderFilteredData));
-    // },[renderFilteredData]);
-
-   
-
 
     useEffect(() => {
        setGeneralFilter({
@@ -143,11 +138,18 @@ const CatalogPage = () => {
         alert(JSON.stringify(generalFilter))
     }
 
+    const navigate = useNavigate();
+
     const onFormSubmit = async (e) => {
         e.preventDefault();
         const response = await RequestService.postFilterData(generalFilter);
-        const data = await response.json;
-        console.log(data);
+        const data = await response;
+        console.log(data)
+        if(data){
+            dispatch(displayFilteredProductsAction(true))
+        } else {
+            navigate("/error");
+        }
       };
 
     const [showFilter, setShowFilter] = useState(false);
@@ -180,7 +182,7 @@ const CatalogPage = () => {
                         </div>
                         <button disabled={!minPrice && !maxPrice && !seasonValue.length && !collectionValue.length && !genderValue.length && !colorValue.length && !sizeValue.length && !availableValue.length}
                                 style={!minPrice && !maxPrice && !seasonValue.length && !collectionValue.length && !genderValue.length && !colorValue.length && !sizeValue.length && !availableValue.length ? {backgroundColor:"gray"} : {backgroundColor:"#0076bd"}} 
-                                onClick={()=>dispatch(displayFilteredProductsAction(true))}  
+                                // onClick={()=>dispatch(displayFilteredProductsAction(true))}  
                                 type="submit" className="btn">Показать товары</button>
                         </fieldset>
                     </form>

@@ -9,14 +9,24 @@ export default class RequestService {
     const response = await axios.post(url, {
       orderData
     }).then(resp => {
-      console.log(resp)
-      return resp
-    }).catch(e => console.log(e))
-    return response.data
+      return resp.data.data
+    }).catch(e => {
+      if (e.response) { 
+        // client received an error response (5xx, 4xx)
+        console.log(e.response)
+      } else if (e.request) { 
+        // client never received a response, or request never left
+        console.log(e.request.status)
+      } else { 
+        // anything else 
+        console.log(e) 
+      } 
+    })
+    return response
   };
 
   static async postFilterData(filterData) {
-    const response = await axios.post(url, {
+   const response = await axios.post(url, {
       season: filterData.season,
       collection: filterData.collection,
       gender: filterData.gender,
@@ -26,10 +36,20 @@ export default class RequestService {
       minPrice: filterData.minPrice,
       maxPrice: filterData.maxPrice
     }).then(resp => {
-      console.log(resp.status)
-      return resp
-    }).catch(e => console.log(e))
-    return response.data
+      return resp.data.data
+    }).catch(e => {
+      if (e.response) { 
+        // client received an error response (5xx, 4xx)
+        console.log(e.response)
+      } else if (e.request) { 
+        // client never received a response, or request never left
+        console.log(e.request.status)
+      } else { 
+        // anything else 
+        console.log(e) 
+      } 
+    })
+    return response
   };
 
   static async postReviewData(formData) {
@@ -39,11 +59,20 @@ export default class RequestService {
       message: formData.message,
       spamProtect: formData.spamProtect
     }).then(resp => {
-      return resp
+      return resp.data.data
     }).catch(e => {
-      console.log(e)
+      if (e.response) { 
+        // client received an error response (5xx, 4xx)
+        console.log(e.response)
+      } else if (e.request) { 
+        // client never received a response, or request never left
+        console.log(e.request.status)
+      } else { 
+        // anything else 
+        console.log(e) 
+      } 
     })
-    return response.data
+    return response
   };
 
 }

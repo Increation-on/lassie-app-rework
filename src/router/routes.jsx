@@ -20,6 +20,7 @@ export const router = [
     { path:"/order", Component: OrderPage, id:8 },
     { path:"/product/:id", Component: ProductPage, id:9 },
     { path:"/product", Component: ProductPage, id:10 },
+    { path:"/error", Component: ErrorPage, id:11 },
     
 ]
 

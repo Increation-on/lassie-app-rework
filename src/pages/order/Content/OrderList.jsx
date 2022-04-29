@@ -98,10 +98,7 @@ const OrderList = (props) => {
                      </p>
                  </div>
              </div>
-             <button type="submit" 
-                    //  onClick={()=>props.getOrderInfo(props.name, props.email, props.phone, props.city, props.street, props.postcode, props.house,
-                    //                 props.housing, props.apartment, props.dhl, props.dpd, props.mailing, props.cash, props.emoney)}
-                     className="btn form__btn form__btn_align_right">Оформить заказ</button>
+             <button type="submit" className="btn form__btn form__btn_align_right">Оформить заказ</button>
              </>:null
             }
            

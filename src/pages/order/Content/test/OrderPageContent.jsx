@@ -30,7 +30,7 @@ const OrderPageContent = () => {
     const onFormSubmit = async (data, e) => {
         e.preventDefault();
         const response = await RequestService.postOrderData(data);
-        const formData = await response.json;
+        const formData = await response;
         console.log(formData);
     }
 

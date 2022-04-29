@@ -37,16 +37,16 @@ const ProductPage = () => {
             <div className="container">
                 <div className="card product-page__card">
                     <div className="card__top">
-                        {currentPath.from === "/catalog" && currentPath.from === `/product/${paramsId}`? 
+                        {currentPath.from === "/catalog" || currentPath.from === `/product/${paramsId}`? 
                             <Gallery prod={displayFilteredProducts ? filteredProducts[paramsId-1] : sortedProducts[paramsId-1]} /> :
                             <Gallery prod={products[paramsId - 1]} />
                         }
-                        {currentPath.from === "/catalog" && currentPath.from === `/product/${paramsId}` ? 
+                        {currentPath.from === "/catalog" || currentPath.from === `/product/${paramsId}` ? 
                             <CardInfo prod={displayFilteredProducts ? filteredProducts[paramsId-1] : sortedProducts[paramsId-1]} /> :
                             <CardInfo prod={products[paramsId - 1]} />
                         }
                     </div>
-                        {currentPath.from === "/catalog" && currentPath.from === `/product/${paramsId}` ?  
+                        {currentPath.from === "/catalog" || currentPath.from === `/product/${paramsId}` ?  
                             <CardTabs prod={displayFilteredProducts ? filteredProducts[paramsId-1] : sortedProducts[paramsId-1]} /> :
                             <CardTabs prod={products[paramsId - 1]} />
                         }

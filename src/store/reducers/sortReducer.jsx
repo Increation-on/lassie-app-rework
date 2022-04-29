@@ -46,7 +46,7 @@ export const sortReducer = (state = initialState, action) => {
         case GET_PRODUCTS:
             return {...state, unsortedProducts: [...action.payload] }    
         case SORT_PRODUCTS: 
-            switch(action.payload){
+            switch(action.payload){    
                 case "price":
                     return {...state, sortedProducts: [...state.sortedByPriceProducts] }
                 case "popular":
